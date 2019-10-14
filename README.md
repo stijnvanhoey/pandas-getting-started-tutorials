@@ -32,3 +32,4 @@ Draft setup of tutorials to support the getting started pages of the Pandas docu
 
 - Use lowercase for pandas
 - Use "" rather than '' quotes
+- `NaN` instead of `Nan`,...

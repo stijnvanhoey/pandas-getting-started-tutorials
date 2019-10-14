@@ -1,8 +1,8 @@
-description,id,name,preferredUnit
-Black Carbon,bc,BC,µg/m³
-Carbon Monoxide,co,CO,ppm
-Nitrogen Dioxide,no2,NO2,ppm
-Ozone,o3,O3,ppm
-Particulate matter less than 10 micrometers in diameter,pm10,PM10,µg/m³
-Particulate matter less than 2.5 micrometers in diameter,pm25,PM2.5,µg/m³
-Sulfur Dioxide,so2,SO2,ppm
+id,description,name
+bc,Black Carbon,BC
+co,Carbon Monoxide,CO
+no2,Nitrogen Dioxide,NO2
+o3,Ozone,O3
+pm10,Particulate matter less than 10 micrometers in diameter,PM10
+pm25,Particulate matter less than 2.5 micrometers in diameter,PM2.5
+so2,Sulfur Dioxide,SO2

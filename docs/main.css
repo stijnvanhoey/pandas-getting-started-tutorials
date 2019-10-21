@@ -1,0 +1,106 @@
+/* Just for the demo */
+h1, h2  {
+    padding-top: 1em;
+}
+
+/* data intro */
+.gs-data {
+    font-size: 0.9rem;
+}
+
+.gs-data-title {
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.gs-data-title .badge {
+    margin: 10px;
+    padding: 5px;
+}
+
+.gs-data .badge {
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 12px;
+  }
+
+.gs-data .btn {  
+   background-color: grey; 
+   border: none;
+}
+
+/* note/alert properties */
+
+.alert-heading {
+    font-size: 1.2rem;
+}
+
+/* callout properties */
+.gs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.gs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.gs-callout p:last-child {
+    margin-bottom: 0;
+}
+.gs-callout code {
+    border-radius: 3px;
+}
+.gs-callout+.gs-callout {
+    margin-top: -5px;
+}
+.gs-callout-task {
+    border-left-color: #4472c4;
+    align-items: center;
+    font-size: 1.2rem;
+}
+.gs-callout-task img {
+    color: #4472c4;
+    padding: 10px;
+}
+.gs-callout-remember {
+    border-left-color: #f0ad4e;
+    align-items: center;
+    font-size: 1.2rem;
+}
+.gs-callout-remember h4 {
+    color: #f0ad4e;
+}
+
+/* reference to user guide */
+.gs-torefguide {
+    align-items: center;
+    padding: 5px;
+    font-size: 1.1rem;
+}
+
+.gs-torefguide .badge {
+    background-color: #4472c4;
+    margin: 10px;
+    padding: 5px;
+}
+
+.gs-torefguide a {
+    margin-left: 5px;
+    color: #4472c4;
+    border-bottom: 1px solid #b2ff80f3;
+    box-shadow: 0px -10px 0px #b2ff80f3 inset;
+}
+
+.gs-torefguide a:hover {
+    margin-left: 5px;
+    color: grey;
+    text-decoration: none;
+    border-bottom: 1px solid #ed7d318d;
+    box-shadow: 0px -10px 0px #ed7d318d inset;
+}

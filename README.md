@@ -20,7 +20,7 @@ Draft setup of tutorials to support the getting started pages of the Pandas docu
 - A pandas DataFrame has columns and row indices, which are defined as column/row __labels__
 - community agreed alias for pandas is `pd`
 - textual data consists of strings
-- one can apply methods to DataFrames and Series, these methods do have parameters which are declared by method arguments (the value passed) on the function call
+- one can call methods on DataFrames and Series, these methods do have parameters which are declared by method arguments (the value passed) on the function call
 - DataFrames and Series do have attributes like dtypes,...
 
 ### Useful remarks on lesson setup

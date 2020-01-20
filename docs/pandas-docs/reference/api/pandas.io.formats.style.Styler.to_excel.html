@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.io.formats.style.Styler.to_excel &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.io.formats.style.Styler.use" href="pandas.io.formats.style.Styler.use.html" />
+    <link rel="prev" title="pandas.io.formats.style.Styler.set_uuid" href="pandas.io.formats.style.Styler.set_uuid.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../series.html">Series</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../arrays.html">Pandas arrays</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../panel.html">Panel</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../indexing.html">Index objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../offset_frequency.html">Date offsets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../window.html">Window</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../groupby.html">GroupBy</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../resampling.html">Resampling</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="../style.html">Style</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.html">pandas.io.formats.style.Styler</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.from_custom_template.html">pandas.io.formats.style.Styler.from_custom_template</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.env.html">pandas.io.formats.style.Styler.env</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.template.html">pandas.io.formats.style.Styler.template</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.loader.html">pandas.io.formats.style.Styler.loader</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.apply.html">pandas.io.formats.style.Styler.apply</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.applymap.html">pandas.io.formats.style.Styler.applymap</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.where.html">pandas.io.formats.style.Styler.where</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.format.html">pandas.io.formats.style.Styler.format</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.set_precision.html">pandas.io.formats.style.Styler.set_precision</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.set_table_styles.html">pandas.io.formats.style.Styler.set_table_styles</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.set_table_attributes.html">pandas.io.formats.style.Styler.set_table_attributes</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.set_caption.html">pandas.io.formats.style.Styler.set_caption</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.set_properties.html">pandas.io.formats.style.Styler.set_properties</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.set_uuid.html">pandas.io.formats.style.Styler.set_uuid</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.set_na_rep.html">pandas.io.formats.style.Styler.set_na_rep</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.clear.html">pandas.io.formats.style.Styler.clear</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.pipe.html">pandas.io.formats.style.Styler.pipe</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.highlight_max.html">pandas.io.formats.style.Styler.highlight_max</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.highlight_min.html">pandas.io.formats.style.Styler.highlight_min</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.highlight_null.html">pandas.io.formats.style.Styler.highlight_null</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.background_gradient.html">pandas.io.formats.style.Styler.background_gradient</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.bar.html">pandas.io.formats.style.Styler.bar</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.render.html">pandas.io.formats.style.Styler.render</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.export.html">pandas.io.formats.style.Styler.export</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.io.formats.style.Styler.use.html">pandas.io.formats.style.Styler.use</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">pandas.io.formats.style.Styler.to_excel</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../plotting.html">Plotting</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_utility_functions.html">General utility functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../extensions.html">Extensions</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-io-formats-style-styler-to-excel">
+<h1>pandas.io.formats.style.Styler.to_excel<a class="headerlink" href="#pandas-io-formats-style-styler-to-excel" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.io.formats.style.Styler.to_excel">
+<code class="sig-prename descclassname">Styler.</code><code class="sig-name descname">to_excel</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">excel_writer</em>, <em class="sig-param">sheet_name='Sheet1'</em>, <em class="sig-param">na_rep=''</em>, <em class="sig-param">float_format=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">header=True</em>, <em class="sig-param">index=True</em>, <em class="sig-param">index_label=None</em>, <em class="sig-param">startrow=0</em>, <em class="sig-param">startcol=0</em>, <em class="sig-param">engine=None</em>, <em class="sig-param">merge_cells=True</em>, <em class="sig-param">encoding=None</em>, <em class="sig-param">inf_rep='inf'</em>, <em class="sig-param">verbose=True</em>, <em class="sig-param">freeze_panes=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/master/pandas/io/formats/style.py#L184-L236"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.io.formats.style.Styler.to_excel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write Styler to an Excel sheet.</p>
+<p>To write a single Styler to an Excel .xlsx file it is only necessary to
+specify a target file name. To write to multiple sheets it is necessary to
+create an <cite>ExcelWriter</cite> object with a target file name, and specify a sheet
+in the file to write to.</p>
+<p>Multiple sheets may be written to by specifying unique <cite>sheet_name</cite>.
+With all data written to the file it is necessary to save the changes.
+Note that creating an <cite>ExcelWriter</cite> object with a file name that already
+exists will result in the contents of the existing file being erased.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>excel_writer</strong><span class="classifier">str or ExcelWriter object</span></dt><dd><p>File path or existing ExcelWriter.</p>
+</dd>
+<dt><strong>sheet_name</strong><span class="classifier">str, default ‘Sheet1’</span></dt><dd><p>Name of sheet which will contain DataFrame.</p>
+</dd>
+<dt><strong>na_rep</strong><span class="classifier">str, default ‘’</span></dt><dd><p>Missing data representation.</p>
+</dd>
+<dt><strong>float_format</strong><span class="classifier">str, optional</span></dt><dd><p>Format string for floating point numbers. For example
+<code class="docutils literal notranslate"><span class="pre">float_format=&quot;%.2f&quot;</span></code> will format 0.1234 to 0.12.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">sequence or list of str, optional</span></dt><dd><p>Columns to write.</p>
+</dd>
+<dt><strong>header</strong><span class="classifier">bool or list of str, default True</span></dt><dd><p>Write out the column names. If a list of string is given it is
+assumed to be aliases for the column names.</p>
+</dd>
+<dt><strong>index</strong><span class="classifier">bool, default True</span></dt><dd><p>Write row names (index).</p>
+</dd>
+<dt><strong>index_label</strong><span class="classifier">str or sequence, optional</span></dt><dd><p>Column label for index column(s) if desired. If not specified, and
+<cite>header</cite> and <cite>index</cite> are True, then the index names are used. A
+sequence should be given if the DataFrame uses MultiIndex.</p>
+</dd>
+<dt><strong>startrow</strong><span class="classifier">int, default 0</span></dt><dd><p>Upper left cell row to dump data frame.</p>
+</dd>
+<dt><strong>startcol</strong><span class="classifier">int, default 0</span></dt><dd><p>Upper left cell column to dump data frame.</p>
+</dd>
+<dt><strong>engine</strong><span class="classifier">str, optional</span></dt><dd><p>Write engine to use, ‘openpyxl’ or ‘xlsxwriter’. You can also set this
+via the options <code class="docutils literal notranslate"><span class="pre">io.excel.xlsx.writer</span></code>, <code class="docutils literal notranslate"><span class="pre">io.excel.xls.writer</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">io.excel.xlsm.writer</span></code>.</p>
+</dd>
+<dt><strong>merge_cells</strong><span class="classifier">bool, default True</span></dt><dd><p>Write MultiIndex and Hierarchical Rows as merged cells.</p>
+</dd>
+<dt><strong>encoding</strong><span class="classifier">str, optional</span></dt><dd><p>Encoding of the resulting excel file. Only necessary for xlwt,
+other writers support unicode natively.</p>
+</dd>
+<dt><strong>inf_rep</strong><span class="classifier">str, default ‘inf’</span></dt><dd><p>Representation for infinity (there is no native representation for
+infinity in Excel).</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">bool, default True</span></dt><dd><p>Display more information in the error logs.</p>
+</dd>
+<dt><strong>freeze_panes</strong><span class="classifier">tuple of int (length 2), optional</span></dt><dd><p>Specifies the one-based bottommost row and rightmost column that
+is to be frozen.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></dt><dd><p>Write DataFrame to a comma-separated values (csv) file.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExcelWriter</span></code></dt><dd><p>Class for writing DataFrame objects into excel sheets.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_excel</span></code></dt><dd><p>Read an Excel file into a pandas DataFrame.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_csv</span></code></dt><dd><p>Read a comma-separated values (csv) file into DataFrame.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>For compatibility with <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_csv()</span></code>,
+to_excel serializes lists and dicts to strings before writing.</p>
+<p>Once a workbook has been saved it is not possible write further data
+without rewriting the whole workbook.</p>
+<p class="rubric">Examples</p>
+<p>Create, write to and save a workbook:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]],</span>
+<span class="gp">... </span>                   <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;row 1&#39;</span><span class="p">,</span> <span class="s1">&#39;row 2&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;col 1&#39;</span><span class="p">,</span> <span class="s1">&#39;col 2&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;output.xlsx&quot;</span><span class="p">)</span>  
+</pre></div>
+</div>
+<p>To specify the sheet name:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;output.xlsx&quot;</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet_name_1&#39;</span><span class="p">)</span>  
+</pre></div>
+</div>
+<p>If you wish to write to more than one sheet in the workbook, it is
+necessary to specify an ExcelWriter object:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;output.xlsx&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>  
+<span class="gp">... </span>    <span class="n">df1</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet_name_1&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">df2</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet_name_2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ExcelWriter can also be used to append to an existing Excel file:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;output.xlsx&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>  
+<span class="gp">... </span>    <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet_name_3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To set the library that is used to write the Excel file,
+you can pass the <cite>engine</cite> keyword (the default engine is
+automatically chosen depending on the file extension):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;output1.xlsx&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;xlsxwriter&#39;</span><span class="p">)</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pandas.io.formats.style.Styler.set_uuid.html" title="previous page">pandas.io.formats.style.Styler.set_uuid</a>
+    <a class='right-next' id="next-link" href="pandas.io.formats.style.Styler.use.html" title="next page">pandas.io.formats.style.Styler.use</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

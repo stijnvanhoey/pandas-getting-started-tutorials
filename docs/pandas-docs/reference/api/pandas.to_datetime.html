@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.to_datetime &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.to_timedelta" href="pandas.to_timedelta.html" />
+    <link rel="prev" title="pandas.to_numeric" href="pandas.to_numeric.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/output</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="../general_functions.html">General functions</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="pandas.melt.html">pandas.melt</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.pivot.html">pandas.pivot</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.pivot_table.html">pandas.pivot_table</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.crosstab.html">pandas.crosstab</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.cut.html">pandas.cut</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.qcut.html">pandas.qcut</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.merge.html">pandas.merge</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.merge_ordered.html">pandas.merge_ordered</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.merge_asof.html">pandas.merge_asof</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.concat.html">pandas.concat</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.get_dummies.html">pandas.get_dummies</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.factorize.html">pandas.factorize</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.unique.html">pandas.unique</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.wide_to_long.html">pandas.wide_to_long</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.isna.html">pandas.isna</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.isnull.html">pandas.isnull</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.notna.html">pandas.notna</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.notnull.html">pandas.notnull</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.to_numeric.html">pandas.to_numeric</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">pandas.to_datetime</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.to_timedelta.html">pandas.to_timedelta</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.date_range.html">pandas.date_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.bdate_range.html">pandas.bdate_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.period_range.html">pandas.period_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.timedelta_range.html">pandas.timedelta_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.infer_freq.html">pandas.infer_freq</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.interval_range.html">pandas.interval_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.eval.html">pandas.eval</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.util.hash_array.html">pandas.util.hash_array</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.util.hash_pandas_object.html">pandas.util.hash_pandas_object</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.test.html">pandas.test</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../series.html">Series</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../arrays.html">Pandas arrays</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../panel.html">Panel</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../indexing.html">Index objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../offset_frequency.html">Date offsets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../window.html">Window</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../groupby.html">GroupBy</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../resampling.html">Resampling</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../style.html">Style</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../plotting.html">Plotting</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_utility_functions.html">General utility functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../extensions.html">Extensions</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-to-datetime">
+<h1>pandas.to_datetime<a class="headerlink" href="#pandas-to-datetime" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pandas.to_datetime">
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">to_datetime</code><span class="sig-paren">(</span><em class="sig-param">arg</em>, <em class="sig-param">errors='raise'</em>, <em class="sig-param">dayfirst=False</em>, <em class="sig-param">yearfirst=False</em>, <em class="sig-param">utc=None</em>, <em class="sig-param">format=None</em>, <em class="sig-param">exact=True</em>, <em class="sig-param">unit=None</em>, <em class="sig-param">infer_datetime_format=False</em>, <em class="sig-param">origin='unix'</em>, <em class="sig-param">cache=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/master/pandas/core/tools/datetimes.py#L527-L742"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.to_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert argument to datetime.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>arg</strong><span class="classifier">int, float, str, datetime, list, tuple, 1-d array, Series DataFrame/dict-like</span></dt><dd><p>The object to convert to a datetime.</p>
+</dd>
+<dt><strong>errors</strong><span class="classifier">{‘ignore’, ‘raise’, ‘coerce’}, default ‘raise’</span></dt><dd><ul class="simple">
+<li><p>If ‘raise’, then invalid parsing will raise an exception.</p></li>
+<li><p>If ‘coerce’, then invalid parsing will be set as NaT.</p></li>
+<li><p>If ‘ignore’, then invalid parsing will return the input.</p></li>
+</ul>
+</dd>
+<dt><strong>dayfirst</strong><span class="classifier">bool, default False</span></dt><dd><p>Specify a date parse order if <cite>arg</cite> is str or its list-likes.
+If True, parses dates with the day first, eg 10/11/12 is parsed as
+2012-11-10.
+Warning: dayfirst=True is not strict, but will prefer to parse
+with day first (this is a known bug, based on dateutil behavior).</p>
+</dd>
+<dt><strong>yearfirst</strong><span class="classifier">bool, default False</span></dt><dd><p>Specify a date parse order if <cite>arg</cite> is str or its list-likes.</p>
+<ul class="simple">
+<li><p>If True parses dates with the year first, eg 10/11/12 is parsed as
+2010-11-12.</p></li>
+<li><p>If both dayfirst and yearfirst are True, yearfirst is preceded (same
+as dateutil).</p></li>
+</ul>
+<p>Warning: yearfirst=True is not strict, but will prefer to parse
+with year first (this is a known bug, based on dateutil behavior).</p>
+</dd>
+<dt><strong>utc</strong><span class="classifier">bool, default None</span></dt><dd><p>Return UTC DatetimeIndex if True (converting any tz-aware
+datetime.datetime objects as well).</p>
+</dd>
+<dt><strong>format</strong><span class="classifier">str, default None</span></dt><dd><p>The strftime to parse time, eg “%d/%m/%Y”, note that “%f” will parse
+all the way up to nanoseconds.
+See strftime documentation for more information on choices:
+<a class="reference external" href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior">https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior</a>.</p>
+</dd>
+<dt><strong>exact</strong><span class="classifier">bool, True by default</span></dt><dd><p>Behaves as:
+- If True, require an exact format match.
+- If False, allow the format to match anywhere in the target string.</p>
+</dd>
+<dt><strong>unit</strong><span class="classifier">str, default ‘ns’</span></dt><dd><p>The unit of the arg (D,s,ms,us,ns) denote the unit, which is an
+integer or float number. This will be based off the origin.
+Example, with unit=’ms’ and origin=’unix’ (the default), this
+would calculate the number of milliseconds to the unix epoch start.</p>
+</dd>
+<dt><strong>infer_datetime_format</strong><span class="classifier">bool, default False</span></dt><dd><p>If True and no <cite>format</cite> is given, attempt to infer the format of the
+datetime strings, and if it can be inferred, switch to a faster
+method of parsing them. In some cases this can increase the parsing
+speed by ~5-10x.</p>
+</dd>
+<dt><strong>origin</strong><span class="classifier">scalar, default ‘unix’</span></dt><dd><p>Define the reference date. The numeric values would be parsed as number
+of units (defined by <cite>unit</cite>) since this reference date.</p>
+<ul class="simple">
+<li><p>If ‘unix’ (or POSIX) time; origin is set to 1970-01-01.</p></li>
+<li><p>If ‘julian’, unit must be ‘D’, and origin is set to beginning of
+Julian Calendar. Julian day number 0 is assigned to the day starting
+at noon on January 1, 4713 BC.</p></li>
+<li><p>If Timestamp convertible, origin is set to Timestamp identified by
+origin.</p></li>
+</ul>
+</dd>
+<dt><strong>cache</strong><span class="classifier">bool, default True</span></dt><dd><p>If True, use a cache of unique, converted dates to apply the datetime
+conversion. May produce significant speed-up when parsing duplicate
+date strings, especially ones with timezone offsets.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.25.0: </span>- changed default value from False to True.</p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt>datetime</dt><dd><p>If parsing succeeded.
+Return type depends on input:</p>
+<ul class="simple">
+<li><p>list-like: DatetimeIndex</p></li>
+<li><p>Series: Series of datetime64 dtype</p></li>
+<li><p>scalar: Timestamp</p></li>
+</ul>
+<p>In case when it is not possible to return designated types (e.g. when
+any element of input is before Timestamp.min or after Timestamp.max)
+return will have datetime.datetime type (or corresponding
+array/Series).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.astype.html#pandas.DataFrame.astype" title="pandas.DataFrame.astype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.astype</span></code></a></dt><dd><p>Cast argument to a specified dtype.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_timedelta</span></code></a></dt><dd><p>Convert argument to timedelta.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Assembling a datetime from multiple columns of a DataFrame. The keys can be
+common abbreviations like [‘year’, ‘month’, ‘day’, ‘minute’, ‘second’,
+‘ms’, ‘us’, ‘ns’]) or plurals of the same</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2016</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;day&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">0   2015-02-04</span>
+<span class="go">1   2016-03-05</span>
+<span class="go">dtype: datetime64[ns]</span>
+</pre></div>
+</div>
+<p>If a date does not meet the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#timeseries-timestamp-limits">timestamp limitations</a>, passing errors=’ignore’
+will return the original input instead of raising any exception.</p>
+<p>Passing errors=’coerce’ will force an out-of-bounds date to NaT,
+in addition to forcing non-dates (or non-parseable dates) to NaT.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;13000101&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="go">datetime.datetime(1300, 1, 1, 0, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;13000101&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="go">NaT</span>
+</pre></div>
+</div>
+<p>Passing infer_datetime_format=True can often-times speedup a parsing
+if its not an ISO8601 format exactly, but in a regular format.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;3/11/2000&#39;</span><span class="p">,</span> <span class="s1">&#39;3/12/2000&#39;</span><span class="p">,</span> <span class="s1">&#39;3/13/2000&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">0    3/11/2000</span>
+<span class="go">1    3/12/2000</span>
+<span class="go">2    3/13/2000</span>
+<span class="go">3    3/11/2000</span>
+<span class="go">4    3/12/2000</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">%</span><span class="n">timeit</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+<span class="go">100 loops, best of 3: 10.4 ms per loop</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">%</span><span class="n">timeit</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+<span class="go">1 loop, best of 3: 471 ms per loop</span>
+</pre></div>
+</div>
+<p>Using a unix epoch time</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="mi">1490195805</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-03-22 15:16:45&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="mi">1490195805433502912</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-03-22 15:16:45.433502912&#39;)</span>
+</pre></div>
+</div>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>For float arg, precision rounding might happen. To prevent
+unexpected behavior use a fixed-width exact type.</p>
+</div>
+<p>Using a non-unix epoch origin</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span>
+<span class="gp">... </span>               <span class="n">origin</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;1960-01-01&#39;</span><span class="p">))</span>
+<span class="go">DatetimeIndex([&#39;1960-01-02&#39;, &#39;1960-01-03&#39;, &#39;1960-01-04&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pandas.to_numeric.html" title="previous page">pandas.to_numeric</a>
+    <a class='right-next' id="next-link" href="pandas.to_timedelta.html" title="next page">pandas.to_timedelta</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

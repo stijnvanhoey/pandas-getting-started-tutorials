@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>How to combine data from multiple tables? &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to handle time series data with ease?" href="09_timeseries.html" />
+    <link rel="prev" title="How to reshape the layout of tables?" href="07_reshape_table_layout.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../reference/index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../install.html">Installation</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../overview.html">Package overview</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../10min.html">10 minutes to pandas</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="index.html">Getting started tutorials</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="01_table_oriented.html">What kind of data does Pandas handle?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="02_read_write.html">How do I read and write tabular data?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="03_subset_data.html">How do I select a subset of a DataFrame?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="04_plotting.html">How to create plots in pandas?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="05_add_columns.html">How to create new columns derived from existing columns?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="06_calculate_statistics.html">How to calculate summary statistics?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="07_reshape_table_layout.html">How to reshape the layout of tables?</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">How to combine data from multiple tables?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="09_timeseries.html">How to handle time series data with ease?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="10_text_data.html">How to manipulate textual data?</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../basics.html">Essential basic functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../dsintro.html">Intro to data structures</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../comparison/index.html">Comparison with other tools</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../tutorials.html">Tutorials</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+
+<div class="tocsection onthispage"><i class="fas fa-list"></i> On this page</div>
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#concatenating-objects" class="nav-link">Concatenating objects</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#join-tables-using-a-common-identifier" class="nav-link">Join tables using a common identifier</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="highlight-ipython notranslate" id="min-tut-08-combine"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header">
+        <div class="gs-data-title">
+            Data used for this tutorial:
+        </div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div data-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+                <span class="badge badge-dark">Air quality Nitrate data</span>
+            </div>
+            <div class="collapse" id="collapsedata">
+                <div class="card-body">
+                    <p class="card-text"><p>For this tutorial, air quality data about <span class="math notranslate nohighlight">\(NO_2\)</span> is used, made available by
+<a class="reference external" href="https://openaq.org">openaq</a> and downloaded using the
+<a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> package.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">air_quality_no2_long.csv</span></code> data set provides <span class="math notranslate nohighlight">\(NO_2\)</span>
+values for the measurement stations <em>FR04014</em>, <em>BETR801</em> and <em>London
+Westminster</em> in respectively Paris, Antwerp and London.</p>
+            </p>
+        <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/air_quality_no2_long.csv" class="btn btn-dark btn-sm">To raw data</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">air_quality_no2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/air_quality_no2_long.csv&quot;</span><span class="p">,</span>
+<span class="gp">   ...: </span>                              <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [3]: </span><span class="n">air_quality_no2</span> <span class="o">=</span> <span class="n">air_quality_no2</span><span class="p">[[</span><span class="s2">&quot;date.utc&quot;</span><span class="p">,</span> <span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="s2">&quot;parameter&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]]</span> <span class="c1"># focus on a subset of columns</span>
+
+<span class="gp">In [4]: </span><span class="n">air_quality_no2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[4]: </span><span class="go"></span>
+<span class="go">                    date.utc location parameter  value</span>
+<span class="go">0  2019-06-21 00:00:00+00:00  FR04014       no2   20.0</span>
+<span class="go">1  2019-06-20 23:00:00+00:00  FR04014       no2   21.8</span>
+<span class="go">2  2019-06-20 22:00:00+00:00  FR04014       no2   26.5</span>
+<span class="go">3  2019-06-20 21:00:00+00:00  FR04014       no2   24.9</span>
+<span class="go">4  2019-06-20 20:00:00+00:00  FR04014       no2   21.4</span>
+</pre></div>
+</div>
+</li>
+<li class="list-group-item">
+    <div data-toggle="collapse" href="#collapsedata2" role="button" aria-expanded="false" aria-controls="collapsedata2">
+        <span class="badge badge-dark">Air quality Particulate matter data</span>
+    </div>
+    <div class="collapse" id="collapsedata2">
+        <div class="card-body">
+            <p class="card-text"><p>For this tutorial, air quality data about Particulate
+matter less than 2.5 micrometers is used, made available by
+<a class="reference external" href="https://openaq.org">openaq</a> and downloaded using the
+<a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> package.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">air_quality_pm25_long.csv</span></code> data set provides <span class="math notranslate nohighlight">\(PM_{25}\)</span>
+values for the measurement stations <em>FR04014</em>, <em>BETR801</em> and <em>London
+Westminster</em> in respectively Paris, Antwerp and London.</p>
+            </p>
+        <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/air_quality_pm25_long.csv" class="btn btn-dark btn-sm">To raw data</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">air_quality_pm25</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/air_quality_pm25_long.csv&quot;</span><span class="p">,</span>
+<span class="gp">   ...: </span>                               <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [6]: </span><span class="n">air_quality_pm25</span> <span class="o">=</span> <span class="n">air_quality_pm25</span><span class="p">[[</span><span class="s2">&quot;date.utc&quot;</span><span class="p">,</span> <span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="s2">&quot;parameter&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]]</span> <span class="c1"># focus on a subset of columns</span>
+
+<span class="gp">In [7]: </span><span class="n">air_quality_pm25</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[7]: </span><span class="go"></span>
+<span class="go">                    date.utc location parameter  value</span>
+<span class="go">0  2019-06-18 06:00:00+00:00  BETR801      pm25   18.0</span>
+<span class="go">1  2019-06-17 08:00:00+00:00  BETR801      pm25    6.5</span>
+<span class="go">2  2019-06-17 07:00:00+00:00  BETR801      pm25   18.5</span>
+<span class="go">3  2019-06-17 06:00:00+00:00  BETR801      pm25   16.0</span>
+<span class="go">4  2019-06-17 05:00:00+00:00  BETR801      pm25    7.5</span>
+</pre></div>
+</div>
+    </li>
+</ul>
+</div><div class="section" id="how-to-combine-data-from-multiple-tables">
+<h1>How to combine data from multiple tables?<a class="headerlink" href="#how-to-combine-data-from-multiple-tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="concatenating-objects">
+<h2>Concatenating objects<a class="headerlink" href="#concatenating-objects" title="Permalink to this headline">¶</a></h2>
+<div align="center" class="align-center"><img alt="../../_images/08_concat_row.svg" src="../../_images/08_concat_row.svg" /></div>
+<ul class="task-bullet">
+    <li><p>I want to combine the measurements of <span class="math notranslate nohighlight">\(NO_2\)</span> and <span class="math notranslate nohighlight">\(PM_{25}\)</span>, two tables with a similar structure, in a single table</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">air_quality_pm25</span><span class="p">,</span> <span class="n">air_quality_no2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [9]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[9]: </span><span class="go"></span>
+<span class="go">                    date.utc location parameter  value</span>
+<span class="go">0  2019-06-18 06:00:00+00:00  BETR801      pm25   18.0</span>
+<span class="go">1  2019-06-17 08:00:00+00:00  BETR801      pm25    6.5</span>
+<span class="go">2  2019-06-17 07:00:00+00:00  BETR801      pm25   18.5</span>
+<span class="go">3  2019-06-17 06:00:00+00:00  BETR801      pm25   16.0</span>
+<span class="go">4  2019-06-17 05:00:00+00:00  BETR801      pm25    7.5</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">concat</span></code> function performs concatenation operations of multiple
+tables along one of the axis (row-wise or column-wise).</p>
+    </li>
+</ul><p>By default concatenation is along axis 0, so the resulting table combines the rows
+of the input tables. Let’s check the shape of the original and the
+concatenated tables to verify the operation:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of the `air_quality_pm25` table: &#39;</span><span class="p">,</span> <span class="n">air_quality_pm25</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">Shape of the `air_quality_pm25` table:  (1110, 4)</span>
+
+<span class="gp">In [11]: </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of the `air_quality_no2` table: &#39;</span><span class="p">,</span> <span class="n">air_quality_no2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">Shape of the `air_quality_no2` table:  (2068, 4)</span>
+
+<span class="gp">In [12]: </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of the resulting `air_quality` table: &#39;</span><span class="p">,</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">Shape of the resulting `air_quality` table:  (3178, 4)</span>
+</pre></div>
+</div>
+<p>Hence, the resulting table has 3178 = 1110 + 2068 rows.</p>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>The <strong>axis</strong> argument will return in a number of pandas
+methods that can be applied <strong>along an axis</strong>. A <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> has two
+corresponding axes: the first running vertically downwards across rows
+(axis 0), and the second running horizontally across columns (axis 1).
+Most operations like concatenation or summary statistics are by default
+across rows (axis 0), but can be applied across columns as well.</p>
+</div>
+<p>Sorting the table on the datetime information illustrates also the
+combination of both tables, with the <code class="docutils literal notranslate"><span class="pre">parameter</span></code> column defining the
+origin of the table (either <code class="docutils literal notranslate"><span class="pre">no2</span></code> from table <code class="docutils literal notranslate"><span class="pre">air_quality_no2</span></code> or
+<code class="docutils literal notranslate"><span class="pre">pm25</span></code> from table <code class="docutils literal notranslate"><span class="pre">air_quality_pm25</span></code>):</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;date.utc&quot;</span><span class="p">)</span>
+
+<span class="gp">In [14]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[14]: </span><span class="go"></span>
+<span class="go">                       date.utc            location parameter  value</span>
+<span class="go">2067  2019-05-07 01:00:00+00:00  London Westminster       no2   23.0</span>
+<span class="go">1003  2019-05-07 01:00:00+00:00             FR04014       no2   25.0</span>
+<span class="go">100   2019-05-07 01:00:00+00:00             BETR801      pm25   12.5</span>
+<span class="go">1098  2019-05-07 01:00:00+00:00             BETR801       no2   50.5</span>
+<span class="go">1109  2019-05-07 01:00:00+00:00  London Westminster      pm25    8.0</span>
+</pre></div>
+</div>
+<p>In this specific example, the <code class="docutils literal notranslate"><span class="pre">parameter</span></code> column provided by the data
+ensures that each of the original tables can be identified. This is not
+always the case. the <code class="docutils literal notranslate"><span class="pre">concat</span></code> function provides a convenient solution
+with the <code class="docutils literal notranslate"><span class="pre">keys</span></code> argument, adding an additional (hierarchical) row
+index. For example:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">air_quality_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">air_quality_pm25</span><span class="p">,</span> <span class="n">air_quality_no2</span><span class="p">],</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;PM25&quot;</span><span class="p">,</span> <span class="s2">&quot;NO2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">air_quality_</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[16]: </span><span class="go"></span>
+<span class="go">                         date.utc location parameter  value</span>
+<span class="go">PM25 0  2019-06-18 06:00:00+00:00  BETR801      pm25   18.0</span>
+<span class="go">     1  2019-06-17 08:00:00+00:00  BETR801      pm25    6.5</span>
+<span class="go">     2  2019-06-17 07:00:00+00:00  BETR801      pm25   18.5</span>
+<span class="go">     3  2019-06-17 06:00:00+00:00  BETR801      pm25   16.0</span>
+<span class="go">     4  2019-06-17 05:00:00+00:00  BETR801      pm25    7.5</span>
+</pre></div>
+</div>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>The existence of multiple row/column indices at the same time
+has not been mentioned within these tutorials. <em>Hierarchical indexing</em>
+or <em>MultiIndex</em> is an advanced and powerfull pandas feature to analyze
+higher dimensional data.</p>
+<p>Multi-indexing is out of scope for this pandas introduction. For the
+moment, remember that the function <code class="docutils literal notranslate"><span class="pre">reset_index</span></code> can be used to
+convert any level of an index to a column, e.g.
+<code class="docutils literal notranslate"><span class="pre">air_quality.reset_index(level=0)</span></code></p>
+<div class="d-flex flex-row  gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>Feel free to dive into the world of multi-indexing at <a class="reference internal" href="../../user_guide/advanced.html#advanced"><span class="std std-ref">MultiIndex / advanced indexing</span></a>.</p>
+</div></div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>More options on table concatenation (row and column
+wise) and how <code class="docutils literal notranslate"><span class="pre">concat</span></code> can be used to define the logic (union or
+intersection) of the indexes on the other axes is provided at
+<a class="reference internal" href="../../user_guide/merging.html#merging-concat"><span class="std std-ref">Concatenating objects</span></a>.</p>
+</div></div>
+<div class="section" id="join-tables-using-a-common-identifier">
+<h2>Join tables using a common identifier<a class="headerlink" href="#join-tables-using-a-common-identifier" title="Permalink to this headline">¶</a></h2>
+<div align="center" class="align-center"><img alt="../../_images/08_merge_left.svg" src="../../_images/08_merge_left.svg" /></div>
+<ul class="task-bullet">
+    <li><p>Add the station coordinates, provided by the stations metadata table, to the corresponding rows in the measurements table.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>The air quality measurement station coordinates are stored in a data
+file <code class="docutils literal notranslate"><span class="pre">air_quality_stations.csv</span></code>, downloaded using the
+<a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> package.</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">stations_coord</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/air_quality_stations.csv&quot;</span><span class="p">)</span>
+
+<span class="gp">In [18]: </span><span class="n">stations_coord</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[18]: </span><span class="go"></span>
+<span class="go">  location  coordinates.latitude  coordinates.longitude</span>
+<span class="go">0  BELAL01              51.23619                4.38522</span>
+<span class="go">1  BELHB23              51.17030                4.34100</span>
+<span class="go">2  BELLD01              51.10998                5.00486</span>
+<span class="go">3  BELLD02              51.12038                5.02155</span>
+<span class="go">4  BELR833              51.32766                4.36226</span>
+</pre></div>
+</div>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>The stations used in this example (FR04014, BETR801 and London
+Westminster) are just three entries enlisted in the metadata table. We
+only want to add the coordinates of these three to the measurements
+table, each on the corresponding rows of the <code class="docutils literal notranslate"><span class="pre">air_quality</span></code> table.</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[19]: </span><span class="go"></span>
+<span class="go">                       date.utc            location parameter  value</span>
+<span class="go">2067  2019-05-07 01:00:00+00:00  London Westminster       no2   23.0</span>
+<span class="go">1003  2019-05-07 01:00:00+00:00             FR04014       no2   25.0</span>
+<span class="go">100   2019-05-07 01:00:00+00:00             BETR801      pm25   12.5</span>
+<span class="go">1098  2019-05-07 01:00:00+00:00             BETR801       no2   50.5</span>
+<span class="go">1109  2019-05-07 01:00:00+00:00  London Westminster      pm25    8.0</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">air_quality</span><span class="p">,</span> <span class="n">stations_coord</span><span class="p">,</span>
+<span class="gp">   ....: </span>                       <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;location&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [21]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[21]: </span><span class="go"></span>
+<span class="go">                    date.utc            location  ... coordinates.latitude  coordinates.longitude</span>
+<span class="go">0  2019-05-07 01:00:00+00:00  London Westminster  ...             51.49467               -0.13193</span>
+<span class="go">1  2019-05-07 01:00:00+00:00             FR04014  ...             48.83724                2.39390</span>
+<span class="go">2  2019-05-07 01:00:00+00:00             FR04014  ...             48.83722                2.39390</span>
+<span class="go">3  2019-05-07 01:00:00+00:00             BETR801  ...             51.20966                4.43182</span>
+<span class="go">4  2019-05-07 01:00:00+00:00             BETR801  ...             51.20966                4.43182</span>
+
+<span class="go">[5 rows x 6 columns]</span>
+</pre></div>
+</div>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">merge</span></code> function, for each of the rows in the
+<code class="docutils literal notranslate"><span class="pre">air_quality</span></code> table, the corresponding coordinates are added from the
+<code class="docutils literal notranslate"><span class="pre">air_quality_stations_coord</span></code> table. Both tables have the column
+<code class="docutils literal notranslate"><span class="pre">location</span></code> in common which is used as a key to combine the
+information. By choosing the <code class="docutils literal notranslate"><span class="pre">left</span></code> join, only the locations available
+in the <code class="docutils literal notranslate"><span class="pre">air_quality</span></code> (left) table, i.e. FR04014, BETR801 and London
+Westminster, end up in the resulting table. The <code class="docutils literal notranslate"><span class="pre">merge</span></code> function
+supports multiple join options similar to database-style operations.</p>
+    </li>
+</ul><ul class="task-bullet">
+    <li><p>Add the parameter full description and name, provided by the parameters metadata table, to the measurements table</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>The air quality parameters metadata are stored in a data file
+<code class="docutils literal notranslate"><span class="pre">air_quality_parameters.csv</span></code>, downloaded using the
+<a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> package.</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">air_quality_parameters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/air_quality_parameters.csv&quot;</span><span class="p">)</span>
+
+<span class="gp">In [23]: </span><span class="n">air_quality_parameters</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[23]: </span><span class="go"></span>
+<span class="go">     id                                        description  name</span>
+<span class="go">0    bc                                       Black Carbon    BC</span>
+<span class="go">1    co                                    Carbon Monoxide    CO</span>
+<span class="go">2   no2                                   Nitrogen Dioxide   NO2</span>
+<span class="go">3    o3                                              Ozone    O3</span>
+<span class="go">4  pm10  Particulate matter less than 10 micrometers in...  PM10</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">air_quality</span><span class="p">,</span> <span class="n">air_quality_parameters</span><span class="p">,</span>
+<span class="gp">   ....: </span>                       <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;parameter&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [25]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[25]: </span><span class="go"></span>
+<span class="go">                    date.utc  ...   name</span>
+<span class="go">0  2019-05-07 01:00:00+00:00  ...    NO2</span>
+<span class="go">1  2019-05-07 01:00:00+00:00  ...    NO2</span>
+<span class="go">2  2019-05-07 01:00:00+00:00  ...    NO2</span>
+<span class="go">3  2019-05-07 01:00:00+00:00  ...  PM2.5</span>
+<span class="go">4  2019-05-07 01:00:00+00:00  ...    NO2</span>
+
+<span class="go">[5 rows x 9 columns]</span>
+</pre></div>
+</div>
+<p>Compared to the previous example, there is no common column name.
+However, the <code class="docutils literal notranslate"><span class="pre">parameter</span></code> column in the <code class="docutils literal notranslate"><span class="pre">air_quality</span></code> table and the
+<code class="docutils literal notranslate"><span class="pre">id</span></code> column in the <code class="docutils literal notranslate"><span class="pre">air_quality_parameters_name</span></code> both provide the
+measured variable in a common format. The <code class="docutils literal notranslate"><span class="pre">left_on</span></code> and <code class="docutils literal notranslate"><span class="pre">right_on</span></code>
+arguments are used here (instead of just <code class="docutils literal notranslate"><span class="pre">on</span></code>) to make the link
+between the two tables.</p>
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>Pandas supports also innPandas supports also inner, outer, and right joins.
+More information on join/merge of tables is provided in
+<a class="reference internal" href="../../user_guide/merging.html#merging-join"><span class="std std-ref">Database-style DataFrame or named Series joining/merging</span></a>. Or have a look to the
+<a class="reference internal" href="../comparison/comparison_with_sql.html#compare-with-sql-join"><span class="std std-ref">comparison with SQL</span></a>.</p>
+</div><div class="shadow gs-callout gs-callout-remember">
+    <h4>REMEMBER</h4><ul class="simple">
+<li><p>Multiple tables can be concatenated both column as row wise using
+the <code class="docutils literal notranslate"><span class="pre">concat</span></code> function.</p></li>
+<li><p>For database-like merging/joining of tables, use the <code class="docutils literal notranslate"><span class="pre">merge</span></code>
+function.</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>The user guide provides more information on combining together data tables, see <a class="reference internal" href="../../user_guide/merging.html#merging"><span class="std std-ref">Merge, join, and concatenate</span></a>.</p>
+</div></div>
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="07_reshape_table_layout.html" title="previous page">How to reshape the layout of tables?</a>
+    <a class='right-next' id="next-link" href="09_timeseries.html" title="next page">How to handle time series data with ease?</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

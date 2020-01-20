@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>How to calculate summary statistics? &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to reshape the layout of tables?" href="07_reshape_table_layout.html" />
+    <link rel="prev" title="How to create new columns derived from existing columns?" href="05_add_columns.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../reference/index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../install.html">Installation</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../overview.html">Package overview</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../10min.html">10 minutes to pandas</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="index.html">Getting started tutorials</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="01_table_oriented.html">What kind of data does Pandas handle?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="02_read_write.html">How do I read and write tabular data?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="03_subset_data.html">How do I select a subset of a DataFrame?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="04_plotting.html">How to create plots in pandas?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="05_add_columns.html">How to create new columns derived from existing columns?</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">How to calculate summary statistics?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="07_reshape_table_layout.html">How to reshape the layout of tables?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="08_combine_dataframes.html">How to combine data from multiple tables?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="09_timeseries.html">How to handle time series data with ease?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="10_text_data.html">How to manipulate textual data?</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../basics.html">Essential basic functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../dsintro.html">Intro to data structures</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../comparison/index.html">Comparison with other tools</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../tutorials.html">Tutorials</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+
+<div class="tocsection onthispage"><i class="fas fa-list"></i> On this page</div>
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#aggregating-statistics" class="nav-link">Aggregating statistics</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#aggregating-statistics-grouped-by-category" class="nav-link">Aggregating statistics grouped by category</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#count-number-of-records-by-category" class="nav-link">Count number of records by category</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="highlight-ipython notranslate" id="min-tut-06-stats"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header">
+        <div class="gs-data-title">
+            Data used for this tutorial:
+        </div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div data-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+                <span class="badge badge-dark">Titanic data</span>
+            </div>
+            <div class="collapse" id="collapsedata">
+                <div class="card-body">
+                    <p class="card-text"><p>This tutorial uses the titanic data set, stored as CSV. The data
+consists of the following data columns:</p>
+<ul class="simple">
+<li><p>PassengerId: Id of every passenger.</p></li>
+<li><p>Survived: This feature have value 0 and 1. 0 for not survived and 1
+for survived.</p></li>
+<li><p>Pclass: There are 3 classes: Class 1, Class 2 and Class 3.</p></li>
+<li><p>Name: Name of passenger.</p></li>
+<li><p>Sex: Gender of passenger.</p></li>
+<li><p>Age: Age of passenger.</p></li>
+<li><p>SibSp: Indication that passenger have siblings and spouse.</p></li>
+<li><p>Parch: Whether a passenger is alone or have family.</p></li>
+<li><p>Ticket: Ticket number of passenger.</p></li>
+<li><p>Fare: Indicating the fare.</p></li>
+<li><p>Cabin: The cabin of passenger.</p></li>
+<li><p>Embarked: The embarked category.</p></li>
+</ul>
+            </p>
+        <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/titanic.csv&quot;</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[3]: </span><span class="go"></span>
+<span class="go">   PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked</span>
+<span class="go">0            1         0       3  ...   7.2500   NaN         S</span>
+<span class="go">1            2         1       1  ...  71.2833   C85         C</span>
+<span class="go">2            3         1       3  ...   7.9250   NaN         S</span>
+<span class="go">3            4         1       1  ...  53.1000  C123         S</span>
+<span class="go">4            5         0       3  ...   8.0500   NaN         S</span>
+
+<span class="go">[5 rows x 12 columns]</span>
+</pre></div>
+</div>
+    </li>
+</ul>
+</div><div class="section" id="how-to-calculate-summary-statistics">
+<h1>How to calculate summary statistics?<a class="headerlink" href="#how-to-calculate-summary-statistics" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="aggregating-statistics">
+<h2>Aggregating statistics<a class="headerlink" href="#aggregating-statistics" title="Permalink to this headline">¶</a></h2>
+<div align="center" class="align-center"><img alt="../../_images/06_aggregate.svg" src="../../_images/06_aggregate.svg" /></div>
+<ul class="task-bullet">
+    <li><p>What is the average age of the titanic passengers?</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[4]: </span><span class="go">29.69911764705882</span>
+</pre></div>
+</div>
+    </li>
+</ul><p>Different statistics are available and can be applied to columns with
+numerical data. Operations in general exclude missing data and operate
+across rows by default.</p>
+<div align="center" class="align-center"><img alt="../../_images/06_reduction.svg" src="../../_images/06_reduction.svg" /></div>
+<ul class="task-bullet">
+    <li><p>What is the median age and ticket fare price of the titanic passengers?</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">titanic</span><span class="p">[[</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Fare&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="gh">Out[5]: </span><span class="go"></span>
+<span class="go">Age     28.0000</span>
+<span class="go">Fare    14.4542</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>The statistic applied to multiple columns of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> (the selection of two columns
+return a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, see the <a class="reference internal" href="03_subset_data.html#min-tut-03-subset"><span class="std std-ref">subset data tutorial</span></a>) is calculated for each numeric column.</p>
+    </li>
+</ul><p>The aggregating statistic can be calculated for multiple columns at the
+same time. Remember the <code class="docutils literal notranslate"><span class="pre">describe</span></code> function from <a class="reference internal" href="01_table_oriented.html#min-tut-01-tableoriented"><span class="std std-ref">first tutorial</span></a> tutorial?</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">titanic</span><span class="p">[[</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Fare&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="go">              Age        Fare</span>
+<span class="go">count  714.000000  891.000000</span>
+<span class="go">mean    29.699118   32.204208</span>
+<span class="go">std     14.526497   49.693429</span>
+<span class="go">min      0.420000    0.000000</span>
+<span class="go">25%     20.125000    7.910400</span>
+<span class="go">50%     28.000000   14.454200</span>
+<span class="go">75%     38.000000   31.000000</span>
+<span class="go">max     80.000000  512.329200</span>
+</pre></div>
+</div>
+<p>Instead of the predefined statistics, specific combinations of
+aggregating statistics for given columns can be defined using the
+<code class="docutils literal notranslate"><span class="pre">agg</span></code> method:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;Age&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;skew&#39;</span><span class="p">],</span>
+<span class="gp">   ...: </span>             <span class="s1">&#39;Fare&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">]})</span>
+<span class="gp">   ...: </span>
+<span class="gh">Out[7]: </span><span class="go"></span>
+<span class="go">              Age        Fare</span>
+<span class="go">max     80.000000  512.329200</span>
+<span class="go">mean          NaN   32.204208</span>
+<span class="go">median  28.000000   14.454200</span>
+<span class="go">min      0.420000    0.000000</span>
+<span class="go">skew     0.389108         NaN</span>
+</pre></div>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>Further details about descriptive statistics is provided in <a class="reference internal" href="../basics.html#basics-stats"><span class="std std-ref">Descriptive statistics</span></a>.</p>
+</div></div>
+<div class="section" id="aggregating-statistics-grouped-by-category">
+<h2>Aggregating statistics grouped by category<a class="headerlink" href="#aggregating-statistics-grouped-by-category" title="Permalink to this headline">¶</a></h2>
+<div align="center" class="align-center"><img alt="../../_images/06_groupby.svg" src="../../_images/06_groupby.svg" /></div>
+<ul class="task-bullet">
+    <li><p>What is the average age for male versus female titanic passengers?</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">titanic</span><span class="p">[[</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[8]: </span><span class="go"></span>
+<span class="go">              Age</span>
+<span class="go">Sex              </span>
+<span class="go">female  27.915709</span>
+<span class="go">male    30.726645</span>
+</pre></div>
+</div>
+<p>As our interest is the average age for each gender, a subselection on
+these two columns is made first: <code class="docutils literal notranslate"><span class="pre">titanic[[&quot;Sex&quot;,</span> <span class="pre">&quot;Age&quot;]]</span></code>. Next, the
+<code class="docutils literal notranslate"><span class="pre">groupby</span></code> method is applied on the <code class="docutils literal notranslate"><span class="pre">Sex</span></code> column to make a group per
+category. The average age <em>for each gender</em> is calculated and
+returned.</p>
+    </li>
+</ul><p>Calculating a given statistic (e.g. <code class="docutils literal notranslate"><span class="pre">mean</span></code> age) <em>for each category in
+a column</em> (e.g. male/female in the <code class="docutils literal notranslate"><span class="pre">Sex</span></code> column) is a common pattern.
+The <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method is used to support this type of operations. More
+general, this fits in the more general <code class="docutils literal notranslate"><span class="pre">split-apply-combine</span></code> pattern:</p>
+<ul class="simple">
+<li><p><strong>Split</strong> the data into groups</p></li>
+<li><p><strong>Apply</strong> a function to each group independently</p></li>
+<li><p><strong>Combine</strong> the results into a data structure</p></li>
+</ul>
+<p>The apply and combine steps are typically done together in pandas.</p>
+<p>In the previous example, we explicitly selected the 2 columns first. If
+not, the <code class="docutils literal notranslate"><span class="pre">mean</span></code> method is applied to each column containing numerical
+columns:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[9]: </span><span class="go"></span>
+<span class="go">        PassengerId  Survived    Pclass        Age     SibSp     Parch       Fare</span>
+<span class="go">Sex                                                                              </span>
+<span class="go">female   431.028662  0.742038  2.159236  27.915709  0.694268  0.649682  44.479818</span>
+<span class="go">male     454.147314  0.188908  2.389948  30.726645  0.429809  0.235702  25.523893</span>
+</pre></div>
+</div>
+<p>It does not make much sense to get the average value of the <code class="docutils literal notranslate"><span class="pre">Pclass</span></code>.
+if we are only interested in the average age for each gender, the
+selection of columns (rectangular brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> as usual) is supported
+on the grouped data as well:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Sex&quot;</span><span class="p">)[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">Sex</span>
+<span class="go">female    27.915709</span>
+<span class="go">male      30.726645</span>
+<span class="go">Name: Age, dtype: float64</span>
+</pre></div>
+</div>
+<div align="center" class="align-center"><img alt="../../_images/06_groupby_select_detail.svg" src="../../_images/06_groupby_select_detail.svg" /></div>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>The <cite>Pclass</cite> column contains numerical data but actually
+represents 3 categories (or factors) with respectively the labels ‘1’,
+‘2’ and ‘3’. Calculating statistics on these does not make much sense.
+Therefore, pandas provides a <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> data type to handle this
+type of data. More information is provided in the user guide
+<a class="reference internal" href="../../user_guide/categorical.html#categorical"><span class="std std-ref">Categorical data</span></a> section.</p>
+</div>
+<ul class="task-bullet">
+    <li><p>What is the mean ticket fare price for each of the sex and cabin class combinations?</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="s2">&quot;Pclass&quot;</span><span class="p">])[</span><span class="s2">&quot;Fare&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[11]: </span><span class="go"></span>
+<span class="go">Sex     Pclass</span>
+<span class="go">female  1         106.125798</span>
+<span class="go">        2          21.970121</span>
+<span class="go">        3          16.118810</span>
+<span class="go">male    1          67.226127</span>
+<span class="go">        2          19.741782</span>
+<span class="go">        3          12.661633</span>
+<span class="go">Name: Fare, dtype: float64</span>
+</pre></div>
+</div>
+<p>Grouping can be done by multiple columns at the same time. Provide the
+column names as a list to the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> method.</p>
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>More information on groupby and the split-apply-combine approach is provided in <a class="reference internal" href="../../user_guide/groupby.html#groupby"><span class="std std-ref">Group By: split-apply-combine</span></a>.</p>
+</div></div>
+<div class="section" id="count-number-of-records-by-category">
+<h2>Count number of records by category<a class="headerlink" href="#count-number-of-records-by-category" title="Permalink to this headline">¶</a></h2>
+<div align="center" class="align-center"><img alt="../../_images/06_valuecounts.svg" src="../../_images/06_valuecounts.svg" /></div>
+<ul class="task-bullet">
+    <li><p>What is the number of passengers in each of the cabin classes?</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">&quot;Pclass&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="gh">Out[12]: </span><span class="go"></span>
+<span class="go">3    491</span>
+<span class="go">1    216</span>
+<span class="go">2    184</span>
+<span class="go">Name: Pclass, dtype: int64</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> function counts the number of records for each
+category in a column.</p>
+    </li>
+</ul><p>The function is a shortcut, as it is actually a groupby operation in combination with counting of the number of records
+within each group:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Pclass&quot;</span><span class="p">)[</span><span class="s2">&quot;Pclass&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="gh">Out[13]: </span><span class="go"></span>
+<span class="go">Pclass</span>
+<span class="go">1    216</span>
+<span class="go">2    184</span>
+<span class="go">3    491</span>
+<span class="go">Name: Pclass, dtype: int64</span>
+</pre></div>
+</div>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">size</span></code> and <code class="docutils literal notranslate"><span class="pre">count</span></code> can be used in combination with
+<code class="docutils literal notranslate"><span class="pre">groupby</span></code>. Whereas <code class="docutils literal notranslate"><span class="pre">size</span></code> includes <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values and just provides
+the number of rows (size of the table), <code class="docutils literal notranslate"><span class="pre">count</span></code> excludes the missing
+values. In the <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> method, use the <code class="docutils literal notranslate"><span class="pre">dropna</span></code> argument to
+include or exclude the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values.</p>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>For more information about <code class="docutils literal notranslate"><span class="pre">value_counts</span></code>, see <a class="reference internal" href="../basics.html#basics-discretization"><span class="std std-ref">Value counts (histogramming) / mode</span></a>.</p>
+</div><div class="shadow gs-callout gs-callout-remember">
+    <h4>REMEMBER</h4><ul class="simple">
+<li><p>Aggregation statistics can be calculated on entire columns or rows</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> provides the power of the <em>split-apply-combine</em> pattern</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value_counts</span></code> is a convenient shortcut to count the number of
+entries in each category of a variable</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>More information on groupby and the split-apply-combine approach is provided in <a class="reference internal" href="../../user_guide/groupby.html#groupby"><span class="std std-ref">Group By: split-apply-combine</span></a>.</p>
+</div></div>
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="05_add_columns.html" title="previous page">How to create new columns derived from existing columns?</a>
+    <a class='right-next' id="next-link" href="07_reshape_table_layout.html" title="next page">How to reshape the layout of tables?</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

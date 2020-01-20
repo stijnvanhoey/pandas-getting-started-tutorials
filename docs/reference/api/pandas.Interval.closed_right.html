@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.Interval.closed_right &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.Interval.is_empty" href="pandas.Interval.is_empty.html" />
+    <link rel="prev" title="pandas.Interval.closed_left" href="pandas.Interval.closed_left.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../series.html">Series</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="../arrays.html">Pandas arrays</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="pandas.array.html">pandas.array</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.html">pandas.Timestamp</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.asm8.html">pandas.Timestamp.asm8</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.day.html">pandas.Timestamp.day</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.dayofweek.html">pandas.Timestamp.dayofweek</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.dayofyear.html">pandas.Timestamp.dayofyear</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.days_in_month.html">pandas.Timestamp.days_in_month</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.daysinmonth.html">pandas.Timestamp.daysinmonth</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.fold.html">pandas.Timestamp.fold</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.hour.html">pandas.Timestamp.hour</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.is_leap_year.html">pandas.Timestamp.is_leap_year</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.is_month_end.html">pandas.Timestamp.is_month_end</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.is_month_start.html">pandas.Timestamp.is_month_start</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.is_quarter_end.html">pandas.Timestamp.is_quarter_end</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.is_quarter_start.html">pandas.Timestamp.is_quarter_start</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.is_year_end.html">pandas.Timestamp.is_year_end</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.is_year_start.html">pandas.Timestamp.is_year_start</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.max.html">pandas.Timestamp.max</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.microsecond.html">pandas.Timestamp.microsecond</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.min.html">pandas.Timestamp.min</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.minute.html">pandas.Timestamp.minute</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.month.html">pandas.Timestamp.month</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.nanosecond.html">pandas.Timestamp.nanosecond</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.quarter.html">pandas.Timestamp.quarter</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.resolution.html">pandas.Timestamp.resolution</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.second.html">pandas.Timestamp.second</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.tz.html">pandas.Timestamp.tz</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.tzinfo.html">pandas.Timestamp.tzinfo</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.value.html">pandas.Timestamp.value</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.week.html">pandas.Timestamp.week</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.weekofyear.html">pandas.Timestamp.weekofyear</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.year.html">pandas.Timestamp.year</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.astimezone.html">pandas.Timestamp.astimezone</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.ceil.html">pandas.Timestamp.ceil</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.combine.html">pandas.Timestamp.combine</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.ctime.html">pandas.Timestamp.ctime</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.date.html">pandas.Timestamp.date</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.day_name.html">pandas.Timestamp.day_name</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.dst.html">pandas.Timestamp.dst</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.floor.html">pandas.Timestamp.floor</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.freq.html">pandas.Timestamp.freq</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.freqstr.html">pandas.Timestamp.freqstr</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.fromordinal.html">pandas.Timestamp.fromordinal</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.fromtimestamp.html">pandas.Timestamp.fromtimestamp</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.isocalendar.html">pandas.Timestamp.isocalendar</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.isoformat.html">pandas.Timestamp.isoformat</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.isoweekday.html">pandas.Timestamp.isoweekday</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.month_name.html">pandas.Timestamp.month_name</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.normalize.html">pandas.Timestamp.normalize</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.now.html">pandas.Timestamp.now</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.replace.html">pandas.Timestamp.replace</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.round.html">pandas.Timestamp.round</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.strftime.html">pandas.Timestamp.strftime</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.strptime.html">pandas.Timestamp.strptime</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.time.html">pandas.Timestamp.time</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.timestamp.html">pandas.Timestamp.timestamp</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.timetuple.html">pandas.Timestamp.timetuple</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.timetz.html">pandas.Timestamp.timetz</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.to_datetime64.html">pandas.Timestamp.to_datetime64</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.to_numpy.html">pandas.Timestamp.to_numpy</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.to_julian_date.html">pandas.Timestamp.to_julian_date</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.to_period.html">pandas.Timestamp.to_period</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.to_pydatetime.html">pandas.Timestamp.to_pydatetime</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.today.html">pandas.Timestamp.today</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.toordinal.html">pandas.Timestamp.toordinal</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.tz_convert.html">pandas.Timestamp.tz_convert</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.tz_localize.html">pandas.Timestamp.tz_localize</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.tzname.html">pandas.Timestamp.tzname</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.utcfromtimestamp.html">pandas.Timestamp.utcfromtimestamp</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.utcnow.html">pandas.Timestamp.utcnow</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.utcoffset.html">pandas.Timestamp.utcoffset</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.utctimetuple.html">pandas.Timestamp.utctimetuple</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timestamp.weekday.html">pandas.Timestamp.weekday</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.DatetimeArray.html">pandas.arrays.DatetimeArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.DatetimeTZDtype.html">pandas.DatetimeTZDtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.html">pandas.Timedelta</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.asm8.html">pandas.Timedelta.asm8</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.components.html">pandas.Timedelta.components</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.days.html">pandas.Timedelta.days</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.delta.html">pandas.Timedelta.delta</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.freq.html">pandas.Timedelta.freq</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.is_populated.html">pandas.Timedelta.is_populated</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.max.html">pandas.Timedelta.max</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.microseconds.html">pandas.Timedelta.microseconds</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.min.html">pandas.Timedelta.min</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.nanoseconds.html">pandas.Timedelta.nanoseconds</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.resolution.html">pandas.Timedelta.resolution</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.seconds.html">pandas.Timedelta.seconds</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.value.html">pandas.Timedelta.value</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.view.html">pandas.Timedelta.view</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.ceil.html">pandas.Timedelta.ceil</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.floor.html">pandas.Timedelta.floor</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.isoformat.html">pandas.Timedelta.isoformat</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.round.html">pandas.Timedelta.round</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.to_pytimedelta.html">pandas.Timedelta.to_pytimedelta</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.to_timedelta64.html">pandas.Timedelta.to_timedelta64</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.to_numpy.html">pandas.Timedelta.to_numpy</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Timedelta.total_seconds.html">pandas.Timedelta.total_seconds</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.TimedeltaArray.html">pandas.arrays.TimedeltaArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.html">pandas.Period</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.day.html">pandas.Period.day</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.dayofweek.html">pandas.Period.dayofweek</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.dayofyear.html">pandas.Period.dayofyear</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.days_in_month.html">pandas.Period.days_in_month</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.daysinmonth.html">pandas.Period.daysinmonth</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.end_time.html">pandas.Period.end_time</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.freq.html">pandas.Period.freq</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.freqstr.html">pandas.Period.freqstr</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.hour.html">pandas.Period.hour</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.is_leap_year.html">pandas.Period.is_leap_year</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.minute.html">pandas.Period.minute</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.month.html">pandas.Period.month</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.ordinal.html">pandas.Period.ordinal</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.quarter.html">pandas.Period.quarter</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.qyear.html">pandas.Period.qyear</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.second.html">pandas.Period.second</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.start_time.html">pandas.Period.start_time</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.week.html">pandas.Period.week</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.weekday.html">pandas.Period.weekday</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.weekofyear.html">pandas.Period.weekofyear</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.year.html">pandas.Period.year</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.asfreq.html">pandas.Period.asfreq</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.now.html">pandas.Period.now</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.strftime.html">pandas.Period.strftime</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Period.to_timestamp.html">pandas.Period.to_timestamp</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.PeriodArray.html">pandas.arrays.PeriodArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.PeriodDtype.html">pandas.PeriodDtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.html">pandas.Interval</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.closed.html">pandas.Interval.closed</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.closed_left.html">pandas.Interval.closed_left</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">pandas.Interval.closed_right</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.is_empty.html">pandas.Interval.is_empty</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.left.html">pandas.Interval.left</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.length.html">pandas.Interval.length</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.mid.html">pandas.Interval.mid</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.open_left.html">pandas.Interval.open_left</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.open_right.html">pandas.Interval.open_right</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.overlaps.html">pandas.Interval.overlaps</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Interval.right.html">pandas.Interval.right</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.IntervalArray.html">pandas.arrays.IntervalArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.IntervalDtype.html">pandas.IntervalDtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.IntegerArray.html">pandas.arrays.IntegerArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Int8Dtype.html">pandas.Int8Dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Int16Dtype.html">pandas.Int16Dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Int32Dtype.html">pandas.Int32Dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Int64Dtype.html">pandas.Int64Dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.UInt8Dtype.html">pandas.UInt8Dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.UInt16Dtype.html">pandas.UInt16Dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.UInt32Dtype.html">pandas.UInt32Dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.UInt64Dtype.html">pandas.UInt64Dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.CategoricalDtype.html">pandas.CategoricalDtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.CategoricalDtype.categories.html">pandas.CategoricalDtype.categories</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.CategoricalDtype.ordered.html">pandas.CategoricalDtype.ordered</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Categorical.html">pandas.Categorical</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Categorical.from_codes.html">pandas.Categorical.from_codes</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Categorical.dtype.html">pandas.Categorical.dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Categorical.categories.html">pandas.Categorical.categories</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Categorical.ordered.html">pandas.Categorical.ordered</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Categorical.codes.html">pandas.Categorical.codes</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.Categorical.__array__.html">pandas.Categorical.__array__</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.SparseArray.html">pandas.arrays.SparseArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.SparseDtype.html">pandas.SparseDtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.StringArray.html">pandas.arrays.StringArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.StringDtype.html">pandas.StringDtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.BooleanArray.html">pandas.arrays.BooleanArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.BooleanDtype.html">pandas.BooleanDtype</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../panel.html">Panel</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../indexing.html">Index objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../offset_frequency.html">Date offsets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../window.html">Window</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../groupby.html">GroupBy</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../resampling.html">Resampling</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../style.html">Style</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../plotting.html">Plotting</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_utility_functions.html">General utility functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../extensions.html">Extensions</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-interval-closed-right">
+<h1>pandas.Interval.closed_right<a class="headerlink" href="#pandas-interval-closed-right" title="Permalink to this headline">¶</a></h1>
+<dl class="attribute">
+<dt id="pandas.Interval.closed_right">
+<code class="sig-prename descclassname">Interval.</code><code class="sig-name descname">closed_right</code><a class="headerlink" href="#pandas.Interval.closed_right" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the interval is closed on the right side.</p>
+<p>For the meaning of <cite>closed</cite> and <cite>open</cite> see <a class="reference internal" href="pandas.Interval.html#pandas.Interval" title="pandas.Interval"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interval</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>bool</dt><dd><p>True if the Interval is closed on the left-side.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pandas.Interval.closed_left.html" title="previous page">pandas.Interval.closed_left</a>
+    <a class='right-next' id="next-link" href="pandas.Interval.is_empty.html" title="next page">pandas.Interval.is_empty</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

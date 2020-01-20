@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.api.extensions.ExtensionArray &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.api.extensions.ExtensionArray.dtype" href="pandas.api.extensions.ExtensionArray.dtype.html" />
+    <link rel="prev" title="pandas.api.extensions.ExtensionDtype.is_dtype" href="pandas.api.extensions.ExtensionDtype.is_dtype.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../series.html">Series</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../arrays.html">Pandas arrays</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../panel.html">Panel</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../indexing.html">Index objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../offset_frequency.html">Date offsets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../window.html">Window</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../groupby.html">GroupBy</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../resampling.html">Resampling</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../style.html">Style</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../plotting.html">Plotting</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_utility_functions.html">General utility functions</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="../extensions.html">Extensions</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="pandas.api.extensions.register_extension_dtype.html">pandas.api.extensions.register_extension_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.extensions.register_dataframe_accessor.html">pandas.api.extensions.register_dataframe_accessor</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.extensions.register_series_accessor.html">pandas.api.extensions.register_series_accessor</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.extensions.register_index_accessor.html">pandas.api.extensions.register_index_accessor</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.extensions.ExtensionDtype.html">pandas.api.extensions.ExtensionDtype</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">pandas.api.extensions.ExtensionArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.arrays.PandasArray.html">pandas.arrays.PandasArray</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.indexers.check_bool_array_indexer.html">pandas.api.indexers.check_bool_array_indexer</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-api-extensions-extensionarray">
+<h1>pandas.api.extensions.ExtensionArray<a class="headerlink" href="#pandas-api-extensions-extensionarray" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pandas.api.extensions.ExtensionArray">
+<em class="property">class </em><code class="sig-prename descclassname">pandas.api.extensions.</code><code class="sig-name descname">ExtensionArray</code><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/master/pandas/core/arrays/base.py#L57-L1074"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.api.extensions.ExtensionArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract base class for custom 1-D array types.</p>
+<p>pandas will recognize instances of this class as proper arrays
+with a custom type and will not attempt to coerce them to objects. They
+may be stored directly inside a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The interface includes the following abstract methods that must be
+implemented by subclasses:</p>
+<ul class="simple">
+<li><p>_from_sequence</p></li>
+<li><p>_from_factorized</p></li>
+<li><p>__getitem__</p></li>
+<li><p>__len__</p></li>
+<li><p>dtype</p></li>
+<li><p>nbytes</p></li>
+<li><p>isna</p></li>
+<li><p>take</p></li>
+<li><p>copy</p></li>
+<li><p>_concat_same_type</p></li>
+</ul>
+<p>A default repr displaying the type, (truncated) data, length,
+and dtype is provided. It can be customized or replaced by
+by overriding:</p>
+<ul class="simple">
+<li><p>__repr__ : A default repr for the ExtensionArray.</p></li>
+<li><p>_formatter : Print scalars inside a Series or DataFrame.</p></li>
+</ul>
+<p>Some methods require casting the ExtensionArray to an ndarray of Python
+objects with <code class="docutils literal notranslate"><span class="pre">self.astype(object)</span></code>, which may be expensive. When
+performance is a concern, we highly recommend overriding the following
+methods:</p>
+<ul class="simple">
+<li><p>fillna</p></li>
+<li><p>dropna</p></li>
+<li><p>unique</p></li>
+<li><p>factorize / _values_for_factorize</p></li>
+<li><p>argsort / _values_for_argsort</p></li>
+<li><p>searchsorted</p></li>
+</ul>
+<p>The remaining methods implemented on this class should be performant,
+as they only compose abstract methods. Still, a more efficient
+implementation may be available, and these methods can be overridden.</p>
+<p>One can implement methods to handle array reductions.</p>
+<ul class="simple">
+<li><p>_reduce</p></li>
+</ul>
+<p>One can implement methods to handle parsing from strings that will be used
+in methods such as <code class="docutils literal notranslate"><span class="pre">pandas.io.parsers.read_csv</span></code>.</p>
+<ul class="simple">
+<li><p>_from_sequence_of_strings</p></li>
+</ul>
+<p>This class does not inherit from ‘abc.ABCMeta’ for performance reasons.
+Methods and properties required by the interface raise
+<code class="docutils literal notranslate"><span class="pre">pandas.errors.AbstractMethodError</span></code> and no <code class="docutils literal notranslate"><span class="pre">register</span></code> method is
+provided for registering virtual subclasses.</p>
+<p>ExtensionArrays are limited to 1 dimension.</p>
+<p>They may be backed by none, one, or many NumPy arrays. For example,
+<code class="docutils literal notranslate"><span class="pre">pandas.Categorical</span></code> is an extension array backed by two arrays,
+one for codes and one for categories. An array of IPv6 address may
+be backed by a NumPy structured array with two fields, one for the
+lower 64 bits and one for the upper 64 bits. Or they may be backed
+by some other storage type, like Python lists. Pandas makes no
+assumptions on how the data are stored, just that it can be converted
+to a NumPy array.
+The ExtensionArray interface does not impose any rules on how this data
+is stored. However, currently, the backing data cannot be stored in
+attributes called <code class="docutils literal notranslate"><span class="pre">.values</span></code> or <code class="docutils literal notranslate"><span class="pre">._values</span></code> to ensure full compatibility
+with pandas internals. But other names as <code class="docutils literal notranslate"><span class="pre">.data</span></code>, <code class="docutils literal notranslate"><span class="pre">._data</span></code>,
+<code class="docutils literal notranslate"><span class="pre">._items</span></code>, … can be freely used.</p>
+<p>If implementing NumPy’s <code class="docutils literal notranslate"><span class="pre">__array_ufunc__</span></code> interface, pandas expects
+that</p>
+<ol class="arabic simple">
+<li><p>You defer by returning <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code> when any Series are present
+in <cite>inputs</cite>. Pandas will extract the arrays and call the ufunc again.</p></li>
+<li><p>You define a <code class="docutils literal notranslate"><span class="pre">_HANDLED_TYPES</span></code> tuple as an attribute on the class.
+Pandas inspect this to determine whether the ufunc is valid for the
+types present.</p></li>
+</ol>
+<p>See <a class="reference internal" href="../../development/extending.html#extending-extension-ufunc"><span class="std std-ref">NumPy Universal Functions</span></a> for more.</p>
+<p class="rubric">Attributes</p>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.dtype.html#pandas.api.extensions.ExtensionArray.dtype" title="pandas.api.extensions.ExtensionArray.dtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dtype</span></code></a></p></td>
+<td><p>An instance of ‘ExtensionDtype’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.nbytes.html#pandas.api.extensions.ExtensionArray.nbytes" title="pandas.api.extensions.ExtensionArray.nbytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nbytes</span></code></a></p></td>
+<td><p>The number of bytes needed to store this object in memory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.ndim.html#pandas.api.extensions.ExtensionArray.ndim" title="pandas.api.extensions.ExtensionArray.ndim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndim</span></code></a></p></td>
+<td><p>Extension Arrays are only allowed to be 1-dimensional.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.shape.html#pandas.api.extensions.ExtensionArray.shape" title="pandas.api.extensions.ExtensionArray.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></a></p></td>
+<td><p>Return a tuple of the array dimensions.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.argsort.html#pandas.api.extensions.ExtensionArray.argsort" title="pandas.api.extensions.ExtensionArray.argsort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">argsort</span></code></a>(self, ascending, kind, \*args, …)</p></td>
+<td><p>Return the indices that would sort this array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.astype.html#pandas.api.extensions.ExtensionArray.astype" title="pandas.api.extensions.ExtensionArray.astype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">astype</span></code></a>(self, dtype[, copy])</p></td>
+<td><p>Cast to a NumPy array with ‘dtype’.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.copy.html#pandas.api.extensions.ExtensionArray.copy" title="pandas.api.extensions.ExtensionArray.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>(self)</p></td>
+<td><p>Return a copy of the array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.dropna.html#pandas.api.extensions.ExtensionArray.dropna" title="pandas.api.extensions.ExtensionArray.dropna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dropna</span></code></a>(self)</p></td>
+<td><p>Return ExtensionArray without NA values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.factorize.html#pandas.api.extensions.ExtensionArray.factorize" title="pandas.api.extensions.ExtensionArray.factorize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">factorize</span></code></a>(self, na_sentinel)</p></td>
+<td><p>Encode the extension array as an enumerated type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.fillna.html#pandas.api.extensions.ExtensionArray.fillna" title="pandas.api.extensions.ExtensionArray.fillna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fillna</span></code></a>(self[, value, method, limit])</p></td>
+<td><p>Fill NA/NaN values using the specified method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.isna.html#pandas.api.extensions.ExtensionArray.isna" title="pandas.api.extensions.ExtensionArray.isna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isna</span></code></a>(self)</p></td>
+<td><p>A 1-D array indicating if each value is missing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.ravel.html#pandas.api.extensions.ExtensionArray.ravel" title="pandas.api.extensions.ExtensionArray.ravel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ravel</span></code></a>(self[, order])</p></td>
+<td><p>Return a flattened view on this array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.repeat.html#pandas.api.extensions.ExtensionArray.repeat" title="pandas.api.extensions.ExtensionArray.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repeat</span></code></a>(self, repeats[, axis])</p></td>
+<td><p>Repeat elements of a ExtensionArray.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.searchsorted.html#pandas.api.extensions.ExtensionArray.searchsorted" title="pandas.api.extensions.ExtensionArray.searchsorted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">searchsorted</span></code></a>(self, value[, side, sorter])</p></td>
+<td><p>Find indices where elements should be inserted to maintain order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.shift.html#pandas.api.extensions.ExtensionArray.shift" title="pandas.api.extensions.ExtensionArray.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift</span></code></a>(self, periods, fill_value)</p></td>
+<td><p>Shift values by desired number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.take.html#pandas.api.extensions.ExtensionArray.take" title="pandas.api.extensions.ExtensionArray.take"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take</span></code></a>(self, indices, allow_fill, fill_value)</p></td>
+<td><p>Take elements from an array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.unique.html#pandas.api.extensions.ExtensionArray.unique" title="pandas.api.extensions.ExtensionArray.unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unique</span></code></a>(self)</p></td>
+<td><p>Compute the ExtensionArray of unique values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray.view.html#pandas.api.extensions.ExtensionArray.view" title="pandas.api.extensions.ExtensionArray.view"><code class="xref py py-obj docutils literal notranslate"><span class="pre">view</span></code></a>(self[, dtype])</p></td>
+<td><p>Return a view on the array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._concat_same_type.html#pandas.api.extensions.ExtensionArray._concat_same_type" title="pandas.api.extensions.ExtensionArray._concat_same_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_concat_same_type</span></code></a>(to_concat)</p></td>
+<td><p>Concatenate multiple array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._formatter.html#pandas.api.extensions.ExtensionArray._formatter" title="pandas.api.extensions.ExtensionArray._formatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_formatter</span></code></a>(self, boxed)</p></td>
+<td><p>Formatting function for scalar values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._from_factorized.html#pandas.api.extensions.ExtensionArray._from_factorized" title="pandas.api.extensions.ExtensionArray._from_factorized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_from_factorized</span></code></a>(values, original)</p></td>
+<td><p>Reconstruct an ExtensionArray after factorization.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._from_sequence.html#pandas.api.extensions.ExtensionArray._from_sequence" title="pandas.api.extensions.ExtensionArray._from_sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_from_sequence</span></code></a>(scalars[, dtype, copy])</p></td>
+<td><p>Construct a new ExtensionArray from a sequence of scalars.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._from_sequence_of_strings.html#pandas.api.extensions.ExtensionArray._from_sequence_of_strings" title="pandas.api.extensions.ExtensionArray._from_sequence_of_strings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_from_sequence_of_strings</span></code></a>(strings[, dtype, copy])</p></td>
+<td><p>Construct a new ExtensionArray from a sequence of strings.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._ndarray_values.html#pandas.api.extensions.ExtensionArray._ndarray_values" title="pandas.api.extensions.ExtensionArray._ndarray_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_ndarray_values</span></code></a></p></td>
+<td><p>Internal pandas method for lossy conversion to a NumPy ndarray.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._reduce.html#pandas.api.extensions.ExtensionArray._reduce" title="pandas.api.extensions.ExtensionArray._reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_reduce</span></code></a>(self, name[, skipna])</p></td>
+<td><p>Return a scalar result of performing the reduction operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._values_for_argsort.html#pandas.api.extensions.ExtensionArray._values_for_argsort" title="pandas.api.extensions.ExtensionArray._values_for_argsort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_values_for_argsort</span></code></a>(self)</p></td>
+<td><p>Return values for sorting.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionArray._values_for_factorize.html#pandas.api.extensions.ExtensionArray._values_for_factorize" title="pandas.api.extensions.ExtensionArray._values_for_factorize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_values_for_factorize</span></code></a>(self)</p></td>
+<td><p>Return an array and missing value suitable for factorization.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pandas.api.extensions.ExtensionDtype.is_dtype.html" title="previous page">pandas.api.extensions.ExtensionDtype.is_dtype</a>
+    <a class='right-next' id="next-link" href="pandas.api.extensions.ExtensionArray.dtype.html" title="next page">pandas.api.extensions.ExtensionArray.dtype</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

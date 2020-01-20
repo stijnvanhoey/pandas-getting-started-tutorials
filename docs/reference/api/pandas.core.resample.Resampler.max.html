@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.core.resample.Resampler.max &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.core.resample.Resampler.mean" href="pandas.core.resample.Resampler.mean.html" />
+    <link rel="prev" title="pandas.core.resample.Resampler.last" href="pandas.core.resample.Resampler.last.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../series.html">Series</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../arrays.html">Pandas arrays</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../panel.html">Panel</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../indexing.html">Index objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../offset_frequency.html">Date offsets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../window.html">Window</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../groupby.html">GroupBy</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="../resampling.html">Resampling</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.__iter__.html">pandas.core.resample.Resampler.__iter__</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.groups.html">pandas.core.resample.Resampler.groups</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.indices.html">pandas.core.resample.Resampler.indices</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.get_group.html">pandas.core.resample.Resampler.get_group</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.apply.html">pandas.core.resample.Resampler.apply</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.aggregate.html">pandas.core.resample.Resampler.aggregate</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.transform.html">pandas.core.resample.Resampler.transform</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.pipe.html">pandas.core.resample.Resampler.pipe</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.ffill.html">pandas.core.resample.Resampler.ffill</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.backfill.html">pandas.core.resample.Resampler.backfill</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.bfill.html">pandas.core.resample.Resampler.bfill</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.pad.html">pandas.core.resample.Resampler.pad</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.nearest.html">pandas.core.resample.Resampler.nearest</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.fillna.html">pandas.core.resample.Resampler.fillna</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.asfreq.html">pandas.core.resample.Resampler.asfreq</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.interpolate.html">pandas.core.resample.Resampler.interpolate</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.count.html">pandas.core.resample.Resampler.count</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.nunique.html">pandas.core.resample.Resampler.nunique</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.first.html">pandas.core.resample.Resampler.first</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.last.html">pandas.core.resample.Resampler.last</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">pandas.core.resample.Resampler.max</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.mean.html">pandas.core.resample.Resampler.mean</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.median.html">pandas.core.resample.Resampler.median</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.min.html">pandas.core.resample.Resampler.min</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.ohlc.html">pandas.core.resample.Resampler.ohlc</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.prod.html">pandas.core.resample.Resampler.prod</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.size.html">pandas.core.resample.Resampler.size</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.sem.html">pandas.core.resample.Resampler.sem</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.std.html">pandas.core.resample.Resampler.std</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.sum.html">pandas.core.resample.Resampler.sum</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.var.html">pandas.core.resample.Resampler.var</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.core.resample.Resampler.quantile.html">pandas.core.resample.Resampler.quantile</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../style.html">Style</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../plotting.html">Plotting</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_utility_functions.html">General utility functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../extensions.html">Extensions</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-core-resample-resampler-max">
+<h1>pandas.core.resample.Resampler.max<a class="headerlink" href="#pandas-core-resample-resampler-max" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.core.resample.Resampler.max">
+<code class="sig-prename descclassname">Resampler.</code><code class="sig-name descname">max</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">_method='max'</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/master/pandas/core/resample.py#L935-L937"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.core.resample.Resampler.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute max of group values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>Series or DataFrame</dt><dd><p>Computed max of values within each group.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pandas.core.resample.Resampler.last.html" title="previous page">pandas.core.resample.Resampler.last</a>
+    <a class='right-next' id="next-link" href="pandas.core.resample.Resampler.mean.html" title="next page">pandas.core.resample.Resampler.mean</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>How to create new columns derived from existing columns? &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to calculate summary statistics?" href="06_calculate_statistics.html" />
+    <link rel="prev" title="How to create plots in pandas?" href="04_plotting.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../reference/index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../install.html">Installation</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../overview.html">Package overview</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../10min.html">10 minutes to pandas</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="index.html">Getting started tutorials</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="01_table_oriented.html">What kind of data does Pandas handle?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="02_read_write.html">How do I read and write tabular data?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="03_subset_data.html">How do I select a subset of a DataFrame?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="04_plotting.html">How to create plots in pandas?</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">How to create new columns derived from existing columns?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="06_calculate_statistics.html">How to calculate summary statistics?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="07_reshape_table_layout.html">How to reshape the layout of tables?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="08_combine_dataframes.html">How to combine data from multiple tables?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="09_timeseries.html">How to handle time series data with ease?</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="10_text_data.html">How to manipulate textual data?</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../basics.html">Essential basic functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../dsintro.html">Intro to data structures</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../comparison/index.html">Comparison with other tools</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../tutorials.html">Tutorials</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="highlight-ipython notranslate" id="min-tut-05-columns"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header">
+        <div class="gs-data-title">
+            Data used for this tutorial:
+        </div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div data-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+                <span class="badge badge-dark">Air quality data</span>
+            </div>
+            <div class="collapse" id="collapsedata">
+                <div class="card-body">
+                    <p class="card-text"><p>For this tutorial, air quality data about <span class="math notranslate nohighlight">\(NO_2\)</span> is used, made
+available by <a class="reference external" href="https://openaq.org">openaq</a> and using the
+<a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> package.
+The <code class="docutils literal notranslate"><span class="pre">air_quality_no2.csv</span></code> data set provides <span class="math notranslate nohighlight">\(NO_2\)</span> values for
+the measurement stations <em>FR04014</em>, <em>BETR801</em> and <em>London Westminster</em>
+in respectively Paris, Antwerp and London.</p>
+            </p>
+        <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/air_quality_no2.csv" class="btn btn-dark btn-sm">To raw data</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/air_quality_no2.csv&quot;</span><span class="p">,</span>
+<span class="gp">   ...: </span>                          <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [3]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[3]: </span><span class="go"></span>
+<span class="go">                     station_antwerp  station_paris  station_london</span>
+<span class="go">datetime                                                           </span>
+<span class="go">2019-05-07 02:00:00              NaN            NaN            23.0</span>
+<span class="go">2019-05-07 03:00:00             50.5           25.0            19.0</span>
+<span class="go">2019-05-07 04:00:00             45.0           27.7            19.0</span>
+<span class="go">2019-05-07 05:00:00              NaN           50.4            16.0</span>
+<span class="go">2019-05-07 06:00:00              NaN           61.9             NaN</span>
+</pre></div>
+</div>
+    </li>
+</ul>
+</div><div class="section" id="how-to-create-new-columns-derived-from-existing-columns">
+<h1>How to create new columns derived from existing columns?<a class="headerlink" href="#how-to-create-new-columns-derived-from-existing-columns" title="Permalink to this headline">¶</a></h1>
+<div align="center" class="align-center"><img alt="../../_images/05_newcolumn_1.svg" src="../../_images/05_newcolumn_1.svg" /></div>
+<ul class="task-bullet">
+    <li><p>I want to express the <span class="math notranslate nohighlight">\(NO_2\)</span> concentration of the station in London in mg/m<span class="math notranslate nohighlight">\(^3\)</span></p>
+<p>(<em>If we assume temperature of 25 degrees Celsius and pressure of 1013
+hPa, the conversion factor is 1.882</em>)</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">air_quality</span><span class="p">[</span><span class="s2">&quot;london_mg_per_cubic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">air_quality</span><span class="p">[</span><span class="s2">&quot;station_london&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.882</span>
+
+<span class="gp">In [5]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[5]: </span><span class="go"></span>
+<span class="go">                     station_antwerp  station_paris  station_london  london_mg_per_cubic</span>
+<span class="go">datetime                                                                                </span>
+<span class="go">2019-05-07 02:00:00              NaN            NaN            23.0               43.286</span>
+<span class="go">2019-05-07 03:00:00             50.5           25.0            19.0               35.758</span>
+<span class="go">2019-05-07 04:00:00             45.0           27.7            19.0               35.758</span>
+<span class="go">2019-05-07 05:00:00              NaN           50.4            16.0               30.112</span>
+<span class="go">2019-05-07 06:00:00              NaN           61.9             NaN                  NaN</span>
+</pre></div>
+</div>
+<p>To create a new column, use the <code class="docutils literal notranslate"><span class="pre">[]</span></code> brackets with the new column name
+at the left side of the assignment.</p>
+    </li>
+</ul><div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>The calculation of the values is done <strong>element_wise</strong>. This
+means all values in the given column are multiplied by the value 1.882
+at once. You do not need to use a loop to iterate each of the rows!</p>
+</div>
+<div align="center" class="align-center"><img alt="../../_images/05_newcolumn_2.svg" src="../../_images/05_newcolumn_2.svg" /></div>
+<ul class="task-bullet">
+    <li><p>I want to check the ratio of the values in Paris versus Antwerp and save the result in a new column</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">air_quality</span><span class="p">[</span><span class="s2">&quot;ratio_paris_antwerp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">air_quality</span><span class="p">[</span><span class="s2">&quot;station_paris&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">air_quality</span><span class="p">[</span><span class="s2">&quot;station_antwerp&quot;</span><span class="p">]</span>
+
+<span class="gp">In [7]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[7]: </span><span class="go"></span>
+<span class="go">                     station_antwerp  station_paris  ...  london_mg_per_cubic  ratio_paris_antwerp</span>
+<span class="go">datetime                                             ...                                          </span>
+<span class="go">2019-05-07 02:00:00              NaN            NaN  ...               43.286                  NaN</span>
+<span class="go">2019-05-07 03:00:00             50.5           25.0  ...               35.758             0.495050</span>
+<span class="go">2019-05-07 04:00:00             45.0           27.7  ...               35.758             0.615556</span>
+<span class="go">2019-05-07 05:00:00              NaN           50.4  ...               30.112                  NaN</span>
+<span class="go">2019-05-07 06:00:00              NaN           61.9  ...                  NaN                  NaN</span>
+
+<span class="go">[5 rows x 5 columns]</span>
+</pre></div>
+</div>
+<p>The calculation is again element-wise, so the <code class="docutils literal notranslate"><span class="pre">/</span></code> is applied <em>for the
+values in each row</em>.</p>
+    </li>
+</ul><p>Also other mathematical operators (+, -, *, /) or
+logical operators (&lt;, &gt;, =,…) work element wise. The latter was already
+used in the <a class="reference internal" href="03_subset_data.html#min-tut-03-subset"><span class="std std-ref">subset data tutorial</span></a> to filter
+rows of a table using a conditional expression.</p>
+<ul class="task-bullet">
+    <li><p>I want to rename the data columns to the corresponding station identifiers used by openAQ</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">air_quality_renamed</span> <span class="o">=</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;station_antwerp&quot;</span><span class="p">:</span> <span class="s2">&quot;BETR801&quot;</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                                    <span class="s2">&quot;station_paris&quot;</span><span class="p">:</span> <span class="s2">&quot;FR04014&quot;</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                                    <span class="s2">&quot;station_london&quot;</span><span class="p">:</span> <span class="s2">&quot;London Westminster&quot;</span><span class="p">})</span>
+<span class="gp">   ...: </span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">air_quality_renamed</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[9]: </span><span class="go"></span>
+<span class="go">                     BETR801  FR04014  London Westminster  london_mg_per_cubic  ratio_paris_antwerp</span>
+<span class="go">datetime                                                                                           </span>
+<span class="go">2019-05-07 02:00:00      NaN      NaN                23.0               43.286                  NaN</span>
+<span class="go">2019-05-07 03:00:00     50.5     25.0                19.0               35.758             0.495050</span>
+<span class="go">2019-05-07 04:00:00     45.0     27.7                19.0               35.758             0.615556</span>
+<span class="go">2019-05-07 05:00:00      NaN     50.4                16.0               30.112                  NaN</span>
+<span class="go">2019-05-07 06:00:00      NaN     61.9                 NaN                  NaN                  NaN</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">rename</span></code> function can be used for both row labels and column
+labels. Provide a dictionary with the keys the current names and the
+values the new names to update the corresponding names.</p>
+    </li>
+</ul><p>The mapping should not be restricted to fixed names only, but can be a
+mapping function as well. For example, converting the column names to
+lowercase letters can be done using a function as well:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">air_quality_renamed</span> <span class="o">=</span> <span class="n">air_quality_renamed</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span>
+
+<span class="gp">In [11]: </span><span class="n">air_quality_renamed</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[11]: </span><span class="go"></span>
+<span class="go">                     betr801  fr04014  london westminster  london_mg_per_cubic  ratio_paris_antwerp</span>
+<span class="go">datetime                                                                                           </span>
+<span class="go">2019-05-07 02:00:00      NaN      NaN                23.0               43.286                  NaN</span>
+<span class="go">2019-05-07 03:00:00     50.5     25.0                19.0               35.758             0.495050</span>
+<span class="go">2019-05-07 04:00:00     45.0     27.7                19.0               35.758             0.615556</span>
+<span class="go">2019-05-07 05:00:00      NaN     50.4                16.0               30.112                  NaN</span>
+<span class="go">2019-05-07 06:00:00      NaN     61.9                 NaN                  NaN                  NaN</span>
+</pre></div>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>Further details about column or row label renaming is provided in <a class="reference internal" href="../basics.html#basics-rename"><span class="std std-ref">Renaming / mapping labels</span></a>.</p>
+</div><div class="shadow gs-callout gs-callout-remember">
+    <h4>REMEMBER</h4><ul class="simple">
+<li><p>Create a new column by assigning the output to the DataFrame with a
+new column name in between the <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p>Operations are element-wise, no need to loop over rows.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">rename</span></code> with a dictionary or function to rename row labels or
+column names.</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">To user guide</span><p>Further details about column addition and deletion is provided in <a class="reference internal" href="../dsintro.html#basics-dataframe-sel-add-del"><span class="std std-ref">Column selection, addition, deletion</span></a>.</p>
+</div></div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="04_plotting.html" title="previous page">How to create plots in pandas?</a>
+    <a class='right-next' id="next-link" href="06_calculate_statistics.html" title="next page">How to calculate summary statistics?</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

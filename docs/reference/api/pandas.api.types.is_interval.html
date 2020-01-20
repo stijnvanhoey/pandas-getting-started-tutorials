@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.api.types.is_interval &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.api.types.is_number" href="pandas.api.types.is_number.html" />
+    <link rel="prev" title="pandas.api.types.is_integer" href="pandas.api.types.is_integer.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../series.html">Series</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../arrays.html">Pandas arrays</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../panel.html">Panel</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../indexing.html">Index objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../offset_frequency.html">Date offsets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../window.html">Window</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../groupby.html">GroupBy</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../resampling.html">Resampling</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../style.html">Style</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../plotting.html">Plotting</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="../general_utility_functions.html">General utility functions</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="pandas.describe_option.html">pandas.describe_option</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.reset_option.html">pandas.reset_option</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.get_option.html">pandas.get_option</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.set_option.html">pandas.set_option</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.option_context.html">pandas.option_context</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.testing.assert_frame_equal.html">pandas.testing.assert_frame_equal</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.testing.assert_series_equal.html">pandas.testing.assert_series_equal</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.testing.assert_index_equal.html">pandas.testing.assert_index_equal</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.testing.assert_extension_array_equal.html">pandas.testing.assert_extension_array_equal</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.errors.DtypeWarning.html">pandas.errors.DtypeWarning</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.errors.EmptyDataError.html">pandas.errors.EmptyDataError</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.errors.OutOfBoundsDatetime.html">pandas.errors.OutOfBoundsDatetime</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.errors.ParserError.html">pandas.errors.ParserError</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.errors.ParserWarning.html">pandas.errors.ParserWarning</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.errors.PerformanceWarning.html">pandas.errors.PerformanceWarning</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.errors.UnsortedIndexError.html">pandas.errors.UnsortedIndexError</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.errors.UnsupportedFunctionCall.html">pandas.errors.UnsupportedFunctionCall</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.union_categoricals.html">pandas.api.types.union_categoricals</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.infer_dtype.html">pandas.api.types.infer_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.pandas_dtype.html">pandas.api.types.pandas_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_bool_dtype.html">pandas.api.types.is_bool_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_categorical_dtype.html">pandas.api.types.is_categorical_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_complex_dtype.html">pandas.api.types.is_complex_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_datetime64_any_dtype.html">pandas.api.types.is_datetime64_any_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_datetime64_dtype.html">pandas.api.types.is_datetime64_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_datetime64_ns_dtype.html">pandas.api.types.is_datetime64_ns_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_datetime64tz_dtype.html">pandas.api.types.is_datetime64tz_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_extension_type.html">pandas.api.types.is_extension_type</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_extension_array_dtype.html">pandas.api.types.is_extension_array_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_float_dtype.html">pandas.api.types.is_float_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_int64_dtype.html">pandas.api.types.is_int64_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_integer_dtype.html">pandas.api.types.is_integer_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_interval_dtype.html">pandas.api.types.is_interval_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_numeric_dtype.html">pandas.api.types.is_numeric_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_object_dtype.html">pandas.api.types.is_object_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_period_dtype.html">pandas.api.types.is_period_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_signed_integer_dtype.html">pandas.api.types.is_signed_integer_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_string_dtype.html">pandas.api.types.is_string_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_timedelta64_dtype.html">pandas.api.types.is_timedelta64_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_timedelta64_ns_dtype.html">pandas.api.types.is_timedelta64_ns_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_unsigned_integer_dtype.html">pandas.api.types.is_unsigned_integer_dtype</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_sparse.html">pandas.api.types.is_sparse</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_dict_like.html">pandas.api.types.is_dict_like</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_file_like.html">pandas.api.types.is_file_like</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_list_like.html">pandas.api.types.is_list_like</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_named_tuple.html">pandas.api.types.is_named_tuple</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_iterator.html">pandas.api.types.is_iterator</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_bool.html">pandas.api.types.is_bool</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_categorical.html">pandas.api.types.is_categorical</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_complex.html">pandas.api.types.is_complex</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_float.html">pandas.api.types.is_float</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_hashable.html">pandas.api.types.is_hashable</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_integer.html">pandas.api.types.is_integer</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">pandas.api.types.is_interval</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_number.html">pandas.api.types.is_number</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_re.html">pandas.api.types.is_re</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_re_compilable.html">pandas.api.types.is_re_compilable</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="pandas.api.types.is_scalar.html">pandas.api.types.is_scalar</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../extensions.html">Extensions</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-api-types-is-interval">
+<h1>pandas.api.types.is_interval<a class="headerlink" href="#pandas-api-types-is-interval" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pandas.api.types.is_interval">
+<code class="sig-prename descclassname">pandas.api.types.</code><code class="sig-name descname">is_interval</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pandas.api.types.is_interval" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pandas.api.types.is_integer.html" title="previous page">pandas.api.types.is_integer</a>
+    <a class='right-next' id="next-link" href="pandas.api.types.is_number.html" title="next page">pandas.api.types.is_number</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

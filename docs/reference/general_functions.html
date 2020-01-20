@@ -1,0 +1,651 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>General functions &#8212; pandas 1.0.0rc0+116.g1e777eb25 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.melt" href="api/pandas.melt.html" />
+    <link rel="prev" title="pandas.io.stata.StataWriter.write_file" href="api/pandas.io.stata.StataWriter.write_file.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../whatsnew/v1.1.0.html">What's New in 1.1.0</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">API reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+          <span><i class="fab fa-github-square"></i></span>
+        </a>
+      </li>
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+          <span><i class="fab fa-twitter-square"></i></span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="io.html">Input/output</a>
+              </li>
+          
+        
+          
+
+              <li class="active">
+                  <a href="">General functions</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="api/pandas.melt.html">pandas.melt</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.pivot.html">pandas.pivot</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.pivot_table.html">pandas.pivot_table</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.crosstab.html">pandas.crosstab</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.cut.html">pandas.cut</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.qcut.html">pandas.qcut</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.merge.html">pandas.merge</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.merge_ordered.html">pandas.merge_ordered</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.merge_asof.html">pandas.merge_asof</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.concat.html">pandas.concat</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.get_dummies.html">pandas.get_dummies</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.factorize.html">pandas.factorize</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.unique.html">pandas.unique</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.wide_to_long.html">pandas.wide_to_long</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.isna.html">pandas.isna</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.isnull.html">pandas.isnull</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.notna.html">pandas.notna</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.notnull.html">pandas.notnull</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.to_numeric.html">pandas.to_numeric</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.to_datetime.html">pandas.to_datetime</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.to_timedelta.html">pandas.to_timedelta</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.date_range.html">pandas.date_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.bdate_range.html">pandas.bdate_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.period_range.html">pandas.period_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.timedelta_range.html">pandas.timedelta_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.infer_freq.html">pandas.infer_freq</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.interval_range.html">pandas.interval_range</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.eval.html">pandas.eval</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.util.hash_array.html">pandas.util.hash_array</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.util.hash_pandas_object.html">pandas.util.hash_pandas_object</a>
+                      </li>
+                  
+                      <li class="">
+                          <a href="api/pandas.test.html">pandas.test</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="series.html">Series</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="frame.html">DataFrame</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="arrays.html">Pandas arrays</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="panel.html">Panel</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="indexing.html">Index objects</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="offset_frequency.html">Date offsets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="window.html">Window</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="groupby.html">GroupBy</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="resampling.html">Resampling</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="style.html">Style</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="plotting.html">Plotting</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="general_utility_functions.html">General utility functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="extensions.html">Extensions</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+
+<div class="tocsection onthispage"><i class="fas fa-list"></i> On this page</div>
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#data-manipulations" class="nav-link">Data manipulations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#top-level-missing-data" class="nav-link">Top-level missing data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#top-level-conversions" class="nav-link">Top-level conversions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#top-level-dealing-with-datetimelike" class="nav-link">Top-level dealing with datetimelike</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#top-level-dealing-with-intervals" class="nav-link">Top-level dealing with intervals</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#top-level-evaluation" class="nav-link">Top-level evaluation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#hashing" class="nav-link">Hashing</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#testing" class="nav-link">Testing</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="general-functions">
+<span id="api-general-functions"></span><h1>General functions<a class="headerlink" href="#general-functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="data-manipulations">
+<h2>Data manipulations<a class="headerlink" href="#data-manipulations" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">melt</span></code></a>(frame[, id_vars, value_vars, var_name, …])</p></td>
+<td><p>Unpivot a DataFrame from wide to long format, optionally leaving identifiers set.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.pivot.html#pandas.pivot" title="pandas.pivot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pivot</span></code></a>(data[, index, columns, values])</p></td>
+<td><p>Return reshaped DataFrame organized by given index / column values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pivot_table</span></code></a>(data[, values, index, columns, …])</p></td>
+<td><p>Create a spreadsheet-style pivot table as a DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.crosstab.html#pandas.crosstab" title="pandas.crosstab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crosstab</span></code></a>(index, columns[, values, rownames, …])</p></td>
+<td><p>Compute a simple cross tabulation of two (or more) factors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.cut.html#pandas.cut" title="pandas.cut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cut</span></code></a>(x, bins, right[, labels])</p></td>
+<td><p>Bin values into discrete intervals.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.qcut.html#pandas.qcut" title="pandas.qcut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qcut</span></code></a>(x, q[, labels])</p></td>
+<td><p>Quantile-based discretization function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>(left, right, how[, on, left_on, …])</p></td>
+<td><p>Merge DataFrame or named Series objects with a database-style join.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.merge_ordered.html#pandas.merge_ordered" title="pandas.merge_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_ordered</span></code></a>(left, right[, on, left_on, …])</p></td>
+<td><p>Perform merge with optional filling/interpolation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_asof</span></code></a>(left, right[, on, left_on, …])</p></td>
+<td><p>Perform an asof merge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concat</span></code></a>(objs, ForwardRef]], …[, axis, …])</p></td>
+<td><p>Concatenate pandas objects along a particular axis with optional set logic along the other axes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.get_dummies.html#pandas.get_dummies" title="pandas.get_dummies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dummies</span></code></a>(data[, prefix, prefix_sep, …])</p></td>
+<td><p>Convert categorical variable into dummy/indicator variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.factorize.html#pandas.factorize" title="pandas.factorize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">factorize</span></code></a>(values, sort, na_sentinel, …)</p></td>
+<td><p>Encode the object as an enumerated type or categorical variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.unique.html#pandas.unique" title="pandas.unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unique</span></code></a>(values)</p></td>
+<td><p>Hash table-based unique.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.wide_to_long.html#pandas.wide_to_long" title="pandas.wide_to_long"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wide_to_long</span></code></a>(df, stubnames, i, j, sep, suffix)</p></td>
+<td><p>Wide panel to long format.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-missing-data">
+<h2>Top-level missing data<a class="headerlink" href="#top-level-missing-data" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isna</span></code></a>(obj)</p></td>
+<td><p>Detect missing values for an array-like object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.isnull.html#pandas.isnull" title="pandas.isnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isnull</span></code></a>(obj)</p></td>
+<td><p>Detect missing values for an array-like object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.notna.html#pandas.notna" title="pandas.notna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">notna</span></code></a>(obj)</p></td>
+<td><p>Detect non-missing values for an array-like object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.notnull.html#pandas.notnull" title="pandas.notnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">notnull</span></code></a>(obj)</p></td>
+<td><p>Detect non-missing values for an array-like object.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-conversions">
+<h2>Top-level conversions<a class="headerlink" href="#top-level-conversions" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.to_numeric.html#pandas.to_numeric" title="pandas.to_numeric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_numeric</span></code></a>(arg[, errors, downcast])</p></td>
+<td><p>Convert argument to a numeric type.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-dealing-with-datetimelike">
+<h2>Top-level dealing with datetimelike<a class="headerlink" href="#top-level-dealing-with-datetimelike" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_datetime</span></code></a>(arg[, errors, dayfirst, …])</p></td>
+<td><p>Convert argument to datetime.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_timedelta</span></code></a>(arg[, unit, errors])</p></td>
+<td><p>Convert argument to timedelta.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.date_range.html#pandas.date_range" title="pandas.date_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date_range</span></code></a>([start, end, periods, freq, tz, …])</p></td>
+<td><p>Return a fixed frequency DatetimeIndex.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.bdate_range.html#pandas.bdate_range" title="pandas.bdate_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bdate_range</span></code></a>([start, end, periods, freq, tz, …])</p></td>
+<td><p>Return a fixed frequency DatetimeIndex, with business day as the default frequency.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.period_range.html#pandas.period_range" title="pandas.period_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">period_range</span></code></a>([start, end, periods, freq, name])</p></td>
+<td><p>Return a fixed frequency PeriodIndex.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.timedelta_range.html#pandas.timedelta_range" title="pandas.timedelta_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timedelta_range</span></code></a>([start, end, periods, freq, …])</p></td>
+<td><p>Return a fixed frequency TimedeltaIndex, with day as the default frequency.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.infer_freq.html#pandas.infer_freq" title="pandas.infer_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_freq</span></code></a>(index, warn)</p></td>
+<td><p>Infer the most likely frequency given the input index.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-dealing-with-intervals">
+<h2>Top-level dealing with intervals<a class="headerlink" href="#top-level-dealing-with-intervals" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.interval_range.html#pandas.interval_range" title="pandas.interval_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interval_range</span></code></a>([start, end, periods, freq, …])</p></td>
+<td><p>Return a fixed frequency IntervalIndex.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-evaluation">
+<h2>Top-level evaluation<a class="headerlink" href="#top-level-evaluation" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(expr[, parser, truediv, local_dict, …])</p></td>
+<td><p>Evaluate a Python expression as a string using various backends.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hashing">
+<h2>Hashing<a class="headerlink" href="#hashing" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.util.hash_array.html#pandas.util.hash_array" title="pandas.util.hash_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">util.hash_array</span></code></a>(vals, encoding, hash_key, …)</p></td>
+<td><p>Given a 1d array, return an array of deterministic integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.util.hash_pandas_object.html#pandas.util.hash_pandas_object" title="pandas.util.hash_pandas_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">util.hash_pandas_object</span></code></a>(obj, index, …)</p></td>
+<td><p>Return a data hash of the Index/Series/DataFrame.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.test.html#pandas.test" title="pandas.test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test</span></code></a>([extra_args])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="api/pandas.io.stata.StataWriter.write_file.html" title="previous page">pandas.io.stata.StataWriter.write_file</a>
+    <a class='right-next' id="next-link" href="api/pandas.melt.html" title="next page">pandas.melt</a>
+
+              </div>
+              
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    //
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    //
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
+    });
+</script><footer class="footer">
+  <div class="container">
+    <p>
+          &copy; Copyright 2008-2020, the pandas development team.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
